@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://brg5dfwudp3c7"]
+
+[ext_resource type="Script" path="res://script/levels/level.gd" id="1_y3gc1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_po2p6"]
+size = Vector2(980, 20)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_y3gc1")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-2, 202)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(15, 0)
+shape = SubResource("RectangleShape2D_po2p6")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Score" type="RichTextLabel" parent="."]
+offset_left = -21.0
+offset_top = -203.0
+offset_right = 19.0
+offset_bottom = -163.0
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

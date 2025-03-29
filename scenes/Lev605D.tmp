@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://brg5dfwudp3c7"]
+
+[ext_resource type="Script" path="res://scenes/Level1.gd" id="1_cxsna"]
+[ext_resource type="PackedScene" uid="uid://kd7d61atmfss" path="res://scenes/Player.tscn" id="1_je6xf"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="2_urgy8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_po2p6"]
+size = Vector2(980, 20)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_cxsna")
+PlayerNode = ExtResource("1_je6xf")
+
+[node name="Dice2" parent="." instance=ExtResource("1_je6xf")]
+visible = false
+position = Vector2(-175, -2)
+script = ExtResource("2_urgy8")
+
+[node name="Dice3" parent="." instance=ExtResource("1_je6xf")]
+visible = false
+script = ExtResource("2_urgy8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-2, 202)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(15, 0)
+shape = SubResource("RectangleShape2D_po2p6")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 421.0
+offset_top = -263.0
+offset_right = 461.0
+offset_bottom = -223.0
+script = ExtResource("2_urgy8")
