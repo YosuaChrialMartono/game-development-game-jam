@@ -1,17 +1,13 @@
 extends Node
 
-enum DICE_TYPE {
-	NUMBER, MULTIPLIER, ELEMENT, WEAPON
-}	
-
 const INIT_NUMBER_VALUES = [1,2,3,4,5,6]
 const INIT_MULTIPLIER_VALUES = ["x1.5", "x2", "x3"]
 const INIT_ELEMENT_VALUES = ["FIRE", "ICE", "EARTH", "AIR"]
 
 var active_dice: Array = [
-	DICE_TYPE.NUMBER,
-	DICE_TYPE.ELEMENT,
-	DICE_TYPE.MULTIPLIER,
+	Dice.DICE_TYPE.NUMBER,
+	Dice.DICE_TYPE.ELEMENT,
+	Dice.DICE_TYPE.MULTIPLIER,
 ]
 
 func add_dice(new_dice: Dice) -> void:

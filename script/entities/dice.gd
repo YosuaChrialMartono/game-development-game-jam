@@ -2,7 +2,11 @@ extends StaticBody2D
 
 class_name Dice
 
-const dice_type_enum = DiceGlobal.DICE_TYPE
+enum DICE_TYPE {
+	NUMBER, MULTIPLIER, ELEMENT, WEAPON
+}	
+
+const dice_type_enum = DICE_TYPE
 const SIZE := Vector2(128,128)
 
 @export var type: dice_type_enum 
@@ -16,13 +20,6 @@ const SIZE := Vector2(128,128)
 @onready var element_dice_sprite = $ElementalDiceSprite
 
 func _ready() -> void:
-	#print_debug("Dice READY: " + name)
-	#print_debug("Type: ", type)
-	#print_debug("Index: ", dice_index)
-	#print_debug(dice_type_enum.NUMBER)
-	#print_debug(dice_type_enum.MULTIPLIER)
-	#print_debug(dice_type_enum.ELEMENT)
-	
 	if type == dice_type_enum.NUMBER:
 		animated_sprite = number_dice_sprite
 	elif type == dice_type_enum.MULTIPLIER:
