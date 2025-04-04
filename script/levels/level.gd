@@ -1,16 +1,25 @@
 extends Node
 
-@onready var score = $Score
+@onready var score = $MarginContainer/Panel/MarginContainer/VBoxContainer/Score
+@onready var dice_parent: Panel = $DiceParent
 
 const DICE_SCENE = preload("res://scenes/characters/Dice.tscn")
 
 func renderDice() -> void:
-	for i:int in range(DiceGlobal.ActiveDice.size()):
+	var dice_count = DiceGlobal.active_dice.size()
+	var spacing = 150
+	
+	# Calculate starting x position so dice are centered
+	var total_width = (dice_count * Dice.SIZE.x) + (dice_count - 1) * spacing
+	#var start_x = (x - total_width) / 2  # Centering logic
+	
+	for i:int in range(DiceGlobal.active_dice.size()):
 		var child = DICE_SCENE.instantiate()
-		child.position = Vector2(i * 150, 0)
+		child.position = Vector2( 64 + i * spacing, dice_parent.size.y / 2)  # 70% down the screen
 		child.name = "Dice" + str(i)
+		child.type = DiceGlobal.active_dice[i]
 		child.dice_index = i
-		add_child(child)
+		dice_parent.add_child(child)
 
 func _input(event):
 	# Reset dice values
@@ -20,8 +29,10 @@ func _input(event):
 func _ready() -> void:
 	print_debug("level ready")
 	renderDice()
-	for i:int in range(DiceGlobal.ActiveDice.size()):
-		DiceGlobal.DiceValue.append(0)
+	
+	# Init dice value array with appropriate size
+	for i:int in range(DiceGlobal.active_dice.size()):
+		DiceGlobal.dice_value.append(0)
 
 func _process(delta: float) -> void:
 	#var totalValue = 0
@@ -31,6 +42,10 @@ func _process(delta: float) -> void:
 	#score.text = str(totalValue)
 	#print_debug(DiceGlobal.DiceValue)
 	var valueText = ""
-	for value in DiceGlobal.DiceValue:
-		valueText += str(value)
-	score.text = valueText
+	for value in DiceGlobal.dice_value:
+		valueText += str(value) + " "
+	score.text = "[center]%s[/center]" % valueText
+
+#func _notification(what):
+	#if what == NOTIFICATION_RESIZED:
+		#renderDice()  # Recalculate positions on resize
