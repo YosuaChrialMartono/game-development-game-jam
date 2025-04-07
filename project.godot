@@ -21,6 +21,7 @@ DiceGlobal="*res://script/dice_global.gd"
 HeroGlobal="*res://script/hero_global.gd"
 UpgradeGlobal="*res://script/upgrade_global.gd"
 EnemiesGlobal="*res://script/enemies_global.gd"
+GameManager="*res://script/game_manager.gd"
 
 [display]
 

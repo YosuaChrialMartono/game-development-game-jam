@@ -23,13 +23,13 @@ func renderDice() -> void:
 	var total_width = (dice_count * Dice.SIZE.x) + (dice_count - 1) * spacing
 	#var start_x = (x - total_width) / 2  # Centering logic
 	
-	for i:int in range(DiceGlobal.active_dice.size()):
-		var child = DICE_SCENE.instantiate()
-		child.position = Vector2( 128 + i * spacing, dice_parent.size.y / 2)  # 70% down the screen
-		child.name = "Dice" + str(i)
-		child.type = DiceGlobal.active_dice[i]
-		child.dice_index = i
+	var dice_num = 0
+	for dice in DiceGlobal.active_dice:
+		var child = dice
+		dice.position = Vector2( 128 + dice_num * spacing, dice_parent.size.y / 2)  # 70% down the screen
+		child.name = "Dice" + str(dice_num)
 		dice_parent.add_child(child)
+		dice_num += 1
 		
 func renderHeroCard() -> void:
 	for i:int in range(HeroGlobal.active_hero.size()):
@@ -72,10 +72,10 @@ func _update_cards() -> void:
 		card.position = Vector2(final_x, final_y)
 		#card.rotation_degrees = max_rotation_degrees * rot_multiplier
 
-func _input(event):
-	# Reset dice values
-	if Input.is_action_just_pressed("ui_accept"):
-		DiceGlobal.reset_dice_value()
+#func _input(event):
+	## Reset dice values
+	#if Input.is_action_just_pressed("ui_accept"):
+		#
 
 func _ready() -> void:
 	print_debug("level ready")
@@ -85,27 +85,12 @@ func _ready() -> void:
 	DiceGlobal.dice_value.resize(DiceGlobal.active_dice.size())
 	DiceGlobal.dice_value.fill(0)
 	
-	# TODO: remove later after debug
-	#HeroGlobal.add_hero(HeroGlobal.HERO_TYPE.WARRIOR)
-	#HeroGlobal.add_hero(HeroGlobal.HERO_TYPE.WARRIOR)
-	HeroGlobal.add_hero(HeroGlobal.HERO_TYPE.WARRIOR)
-	HeroGlobal.add_hero(HeroGlobal.HERO_TYPE.WARRIOR)
-	HeroGlobal.add_hero(HeroGlobal.HERO_TYPE.WARRIOR)
-	HeroGlobal.add_hero(HeroGlobal.HERO_TYPE.WARRIOR)
-	HeroGlobal.add_hero(HeroGlobal.HERO_TYPE.WARRIOR)
-	HeroGlobal.add_hero(HeroGlobal.HERO_TYPE.WARRIOR)
 	renderHeroCard()
 	_update_cards()
-	renderEnemy()
 	
+	renderEnemy()
 
 func _process(delta: float) -> void:
-	#var totalValue = 0
-	#for value in DiceGlobal.DiceValue:
-		#if value is int:
-			#totalValue += value
-	#score.text = str(totalValue)
-	#print_debug(DiceGlobal.DiceValue)
 	var valueText = ""
 	for value in DiceGlobal.dice_value:
 		valueText += str(value) + " "
