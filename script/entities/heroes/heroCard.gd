@@ -1,7 +1,6 @@
 class_name HeroCard
 extends Node
 
-
 enum HERO_ATTACK_RANGE {
 	MELEE, RANGED
 }
@@ -9,6 +8,8 @@ enum HERO_ATTACK_RANGE {
 enum DAMAGE_TYPE {
 	PHYSICAL, MAGIC
 }
+
+const SIZE := Vector2(171, 256)
 
 @export var card_index: int
 @export var hero_resource : BaseHeroResource:

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="BaseHeroResource" load_steps=3 format=3 uid="uid://cd20jpjkxheg2"]
 
 [ext_resource type="Script" path="res://script/entities/heroes/base_hero_resources.gd" id="1_e76vd"]
-[ext_resource type="Texture2D" uid="uid://bvko5ywn35lcp" path="res://asset/textures/Card-1.png" id="2_yck42"]
+[ext_resource type="Texture2D" uid="uid://0jf14tl4bnu3" path="res://asset/textures/Card.png" id="2_xqp0u"]
 
 [resource]
 script = ExtResource("1_e76vd")
 attack_range = 0
 damage_type = 0
 hero_actions = []
-texture = ExtResource("2_yck42")
+texture = ExtResource("2_xqp0u")
