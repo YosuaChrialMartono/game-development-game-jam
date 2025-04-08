@@ -1,0 +1,4 @@
+[gd_resource type="SystemFont" format=3 uid="uid://bw5yqtdhe4yv7"]
+
+[resource]
+font_names = PackedStringArray("Futura", "Poppins", "Satoshi", "Sans-Serif")

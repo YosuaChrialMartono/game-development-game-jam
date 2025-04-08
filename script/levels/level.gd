@@ -17,9 +17,13 @@ extends Node
 @onready var hero_card_parent: Panel = $HeroCardParent
 @onready var hero_card_hand = $CardManager/Hand
 
+@onready var enemy_name: Label = $EnemyInfo/EnemyName
+@onready var hp_bar: ProgressBar = $EnemyInfo/HPBar
+@onready var shield_bar: ProgressBar = $EnemyInfo/ShieldBar
+
 const DICE_SCENE = preload("res://scenes/characters/Dice.tscn")
 
-func renderDice() -> void:
+func _renderDice() -> void:
 	var dice_count = DiceGlobal.active_dice.size()
 	var spacing = 150
 	
@@ -37,69 +41,33 @@ func renderDice() -> void:
 		
 	
 		
-func renderHeroCard() -> void:
-	#for i:int in range(HeroGlobal.active_hero.size()):
-		#var child: HeroCard = HeroGlobal.active_hero[i]
-		##child.card_index = i
-		#hero_card_parent.add_child(child)
-	var hero_card_list = ["warrior","warrior","warrior","warrior","warrior"]
+func _renderHeroCard() -> void:
+	var hero_card_list = ["warrior","warrior","warrior","warrior","warrior", "slime"]
 	for card in hero_card_list:
 		card_factory.create_card(card, hero_card_hand)
-		#child.card_index = i
-		#hero_card_parent.add_child(child)
-	
-		
-func renderEnemy() -> void:
+
+func _renderEnemy() -> void:
 	var child: Enemy = EnemiesGlobal.active_enemy
 	enemy_parent.add_child(child)
-		
-func _update_cards() -> void:
-	var cards = HeroGlobal.active_hero.size()
-	var all_cards_size:int = HeroCard.SIZE.x * cards + x_sep * (cards -1)
-	var final_x_sep := x_sep
-	
-	if all_cards_size > hero_card_parent.size.x:
-		final_x_sep = (hero_card_parent.size.x - HeroCard.SIZE.x * cards) / (cards -1)
-		all_cards_size = hero_card_parent.size.x
-		print_debug(all_cards_size)
-		print_debug(hero_card_parent.size.x)
-		
-	var offset := (hero_card_parent.size.x - all_cards_size) / 2
-	print_debug(final_x_sep)
-	
-	for i in cards:
-		var card := hero_card_parent.get_child(i)
-		#var y_multiplier := hand_curve.sample(1.0 / (cards-1) * i)
-		#var rot_multiplier := rotation_curve.sample(1.0 / (cards-1) * i) 
-		
-		#if cards == 1:
-			#y_multiplier = 0.0
-			#rot_multiplier = 0.0
-		
-		var final_x: float = offset + HeroCard.SIZE.x * i + final_x_sep * i
-		#var final_y: float = y_min + y_max * y_multiplier
-		var final_y: float = y_min 
-		
-		card.position = Vector2(final_x, final_y)
-		#card.rotation_degrees = max_rotation_degrees * rot_multiplier
 
-#func _input(event):
-	## Reset dice values
-	#if Input.is_action_just_pressed("ui_accept"):
-		#
 
+func _setup_enemy_info():
+	enemy_name.text = EnemiesGlobal.active_enemy.enemy_resource.name
+	hp_bar.max_value = EnemiesGlobal.active_enemy.enemy_resource.hp
+	hp_bar.value = EnemiesGlobal.active_enemy.enemy_resource.hp
+	
 func _ready() -> void:
 	print_debug("level ready")
-	renderDice()
+	_renderDice()
 	
 	# Init dice value array with appropriate size
 	DiceGlobal.dice_value.resize(DiceGlobal.active_dice.size())
 	DiceGlobal.dice_value.fill(0)
 	
-	renderHeroCard()
-	#_update_cards()
+	_renderHeroCard()
 	
-	renderEnemy()
+	_renderEnemy()
+	_setup_enemy_info()
 
 func _process(delta: float) -> void:
 	var valueText = ""
@@ -107,14 +75,16 @@ func _process(delta: float) -> void:
 		valueText += str(value) + " "
 	score.text = "[center]%s[/center]" % valueText
 
-#func _notification(what):
-	#if what == NOTIFICATION_RESIZED:
-		#renderDice()  # Recalculate positions on resize
-
 
 func _on_next_level_button_pressed() -> void:
 	GameManager.initNewLevel()
+	hp_bar.max_value = EnemiesGlobal.active_enemy.enemy_resource.hp
+	hp_bar.value = EnemiesGlobal.active_enemy.enemy_resource.hp
 
 
 func _on_button_pressed() -> void:
 	GameManager.attack()
+	
+	await get_tree().create_timer(1.0).timeout
+	
+	hp_bar.value = EnemiesGlobal.active_enemy.enemy_resource.hp

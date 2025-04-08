@@ -20,7 +20,6 @@ func calculateDamage() -> int:
 	# Count all number value
 	for value in DiceGlobal.dice_value:
 		if value is int:
-			print_debug(value)
 			total_value += int(value)
 	
 	# Multiply all value

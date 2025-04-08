@@ -1,18 +1,9 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://8dcp3ixxoxk"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://8dcp3ixxoxk"]
 
-[sub_resource type="SystemFont" id="SystemFont_6i82i"]
-font_names = PackedStringArray("Satoshi", "Sans-Serif")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5gh12"]
-bg_color = Color(0.489622, 0.489622, 0.489622, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-expand_margin_left = 8.0
-expand_margin_top = 8.0
-expand_margin_right = 8.0
-expand_margin_bottom = 8.0
+[ext_resource type="StyleBox" uid="uid://cedqi1xisbadd" path="res://resources/ui/button_focus_styled_box_flat.tres" id="1_qpqhp"]
+[ext_resource type="StyleBox" uid="uid://cs48puc6ajtef" path="res://resources/ui/button_hover_styled_box_flat.tres" id="1_vm8ha"]
+[ext_resource type="SystemFont" uid="uid://bw5yqtdhe4yv7" path="res://resources/ui/font.tres" id="1_xdatv"]
+[ext_resource type="StyleBox" uid="uid://buclcstbpjn00" path="res://resources/ui/button_styled_box_flat.tres" id="2_lv5g7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3e11"]
 corner_radius_top_left = 16
@@ -20,8 +11,36 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewww0"]
+bg_color = Color(0.366595, 0.366595, 0.366594, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_puvtn"]
+bg_color = Color(0.84996, 0.273059, 0.20051, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
 [resource]
 Button/font_sizes/font_size = 48
-Button/fonts/font = SubResource("SystemFont_6i82i")
-Button/styles/normal = SubResource("StyleBoxFlat_5gh12")
+Button/fonts/font = ExtResource("1_xdatv")
+Button/styles/focus = ExtResource("1_qpqhp")
+Button/styles/hover = ExtResource("1_vm8ha")
+Button/styles/normal = ExtResource("2_lv5g7")
+Label/fonts/font = ExtResource("1_xdatv")
 Panel/styles/panel = SubResource("StyleBoxFlat_i3e11")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_ewww0")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_puvtn")
