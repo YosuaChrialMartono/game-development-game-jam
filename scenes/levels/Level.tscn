@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://brg5dfwudp3c7"]
+[gd_scene load_steps=9 format=3 uid="uid://brg5dfwudp3c7"]
 
 [ext_resource type="Script" path="res://script/levels/level.gd" id="1_y3gc1"]
-[ext_resource type="Script" path="res://scenes/levels/hero_card_hand.gd" id="2_18266"]
 [ext_resource type="Theme" uid="uid://8dcp3ixxoxk" path="res://resources/ui/UI.tres" id="2_dl4mi"]
+[ext_resource type="PackedScene" uid="uid://c7u8hryloq7hy" path="res://addons/card-framework/card_manager.tscn" id="3_d1wcv"]
+[ext_resource type="Texture2D" uid="uid://dm2jreyeeqp7o" path="res://asset/textures/cards/Card-back.png" id="4_osc3f"]
+[ext_resource type="PackedScene" uid="uid://bkpjlq7ggckg6" path="res://addons/card-framework/hand.tscn" id="5_mjs7d"]
 
 [sub_resource type="Curve" id="Curve_y8j7x"]
 _data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.0, 0.0, 0, 0]
@@ -12,6 +14,11 @@ point_count = 3
 min_value = -1.0
 _data = [Vector2(0, -1), 0.0, 6.0, 0, 0, Vector2(0.505263, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 6.0, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="GDScript" id="GDScript_qfxnm"]
+script/source = "class_name HeroCardHand
+extends Panel
+"
 
 [node name="Level" type="Control"]
 layout_mode = 3
@@ -108,7 +115,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 10
 theme = ExtResource("2_dl4mi")
-script = ExtResource("2_18266")
+script = SubResource("GDScript_qfxnm")
 
 [node name="EnemyParent" type="Control" parent="."]
 layout_mode = 1
@@ -159,6 +166,19 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 0
 bbcode_enabled = true
+
+[node name="CardManager" parent="." instance=ExtResource("3_d1wcv")]
+card_asset_dir = "res://asset/textures/cards"
+card_info_dir = "res://resources/card-info/"
+back_image = ExtResource("4_osc3f")
+
+[node name="Hand" parent="CardManager" instance=ExtResource("5_mjs7d")]
+offset_left = 1216.0
+offset_top = 792.0
+offset_right = 1216.0
+offset_bottom = 792.0
+hand_rotation_curve = null
+hand_vertical_curve = null
 
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

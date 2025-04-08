@@ -2,7 +2,6 @@ extends Node
 
 @onready var score = $MarginContainer/Panel/MarginContainer/VBoxContainer/Score
 @onready var dice_parent: Panel = $DiceParent
-@onready var hero_card_parent: Panel = $HeroCardParent
 @onready var enemy_parent: Control = $EnemyParent
 
 @export var hand_curve: Curve
@@ -12,6 +11,11 @@ extends Node
 @export var x_sep := 56
 @export var y_min := 50
 @export var y_max := -50
+
+@onready var card_manager = $CardManager
+@onready var card_factory = $CardManager/CardFactory
+@onready var hero_card_parent: Panel = $HeroCardParent
+@onready var hero_card_hand = $CardManager/Hand
 
 const DICE_SCENE = preload("res://scenes/characters/Dice.tscn")
 
@@ -34,10 +38,16 @@ func renderDice() -> void:
 	
 		
 func renderHeroCard() -> void:
-	for i:int in range(HeroGlobal.active_hero.size()):
-		var child: HeroCard = HeroGlobal.active_hero[i]
+	#for i:int in range(HeroGlobal.active_hero.size()):
+		#var child: HeroCard = HeroGlobal.active_hero[i]
+		##child.card_index = i
+		#hero_card_parent.add_child(child)
+	var hero_card_list = ["warrior","warrior","warrior","warrior","warrior"]
+	for card in hero_card_list:
+		card_factory.create_card(card, hero_card_hand)
 		#child.card_index = i
-		hero_card_parent.add_child(child)
+		#hero_card_parent.add_child(child)
+	
 		
 func renderEnemy() -> void:
 	var child: Enemy = EnemiesGlobal.active_enemy
@@ -87,7 +97,7 @@ func _ready() -> void:
 	DiceGlobal.dice_value.fill(0)
 	
 	renderHeroCard()
-	_update_cards()
+	#_update_cards()
 	
 	renderEnemy()
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=37 format=3 uid="uid://kd7d61atmfss"]
 
 [ext_resource type="Script" path="res://script/entities/dice.gd" id="1_euvij"]
-[ext_resource type="Texture2D" uid="uid://d1ksdop1g7qwp" path="res://asset/textures/Dice V1.png" id="2_7eweb"]
-[ext_resource type="Texture2D" uid="uid://0cktln1a8vig" path="res://asset/textures/Blank Dice.png" id="3_1pf5s"]
+[ext_resource type="Texture2D" uid="uid://d1ksdop1g7qwp" path="res://asset/textures/dices/Dice V1.png" id="2_7eweb"]
+[ext_resource type="Texture2D" uid="uid://0cktln1a8vig" path="res://asset/textures/dices/Blank Dice.png" id="3_1pf5s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r168r"]
 atlas = ExtResource("2_7eweb")

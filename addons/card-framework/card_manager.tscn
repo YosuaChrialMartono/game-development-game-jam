@@ -1,15 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7u8hryloq7hy"]
+[gd_scene load_steps=3 format=3 uid="uid://c7u8hryloq7hy"]
 
 [ext_resource type="Script" path="res://addons/card-framework/card_manager.gd" id="1_cp2xm"]
 [ext_resource type="PackedScene" uid="uid://7qcsutlss3oj" path="res://addons/card-framework/card_factory.tscn" id="2_57jpu"]
-[ext_resource type="Texture2D" uid="uid://dm2jreyeeqp7o" path="res://asset/textures/cards/Card-back.png" id="2_cowvn"]
 
 [node name="CardManager" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_cp2xm")
-card_size = Vector2(171, 256)
-card_asset_dir = "res://asset/textures/cards/"
-card_info_dir = "res://resources/card-info/"
-back_image = ExtResource("2_cowvn")
 card_factory_scene = ExtResource("2_57jpu")
