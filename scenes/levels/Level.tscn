@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://script/levels/level.gd" id="1_y3gc1"]
 [ext_resource type="Script" path="res://scenes/levels/hero_card_hand.gd" id="2_18266"]
+[ext_resource type="Theme" uid="uid://8dcp3ixxoxk" path="res://resources/ui/UI.tres" id="2_dl4mi"]
 
 [sub_resource type="Curve" id="Curve_y8j7x"]
 _data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.0, 0.0, 0, 0]
@@ -11,8 +12,6 @@ point_count = 3
 min_value = -1.0
 _data = [Vector2(0, -1), 0.0, 6.0, 0, 0, Vector2(0.505263, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 6.0, 0.0, 0, 0]
 point_count = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ykex"]
 
 [node name="Level" type="Control"]
 layout_mode = 3
@@ -38,6 +37,7 @@ theme_override_constants/margin_bottom = 50
 
 [node name="Panel" type="Panel" parent="MarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_dl4mi")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
 layout_mode = 1
@@ -46,14 +46,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 32
 
 [node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -67,10 +68,12 @@ bbcode_enabled = true
 
 [node name="NextLevelButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Next Level"
 
 [node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Roll"
 
 [node name="DiceParent" type="Panel" parent="."]
@@ -81,12 +84,13 @@ anchor_top = 0.911
 anchor_right = 0.312
 anchor_bottom = 0.911
 offset_left = -255.04
-offset_top = -87.8801
+offset_top = -103.88
 offset_right = 256.96
-offset_bottom = 96.1199
+offset_bottom = 80.12
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 10
+theme = ExtResource("2_dl4mi")
 
 [node name="HeroCardParent" type="Panel" parent="."]
 custom_minimum_size = Vector2(640, 200)
@@ -96,14 +100,14 @@ anchor_left = 0.467
 anchor_top = 0.83
 anchor_right = 0.467
 anchor_bottom = 0.83
-offset_left = 383.36
-offset_top = 63.6
-offset_right = 384.0
-offset_bottom = 64.0
+offset_left = 63.36
+offset_top = -32.4
+offset_right = 703.36
+offset_bottom = 167.6
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 10
-theme_override_styles/panel = SubResource("StyleBoxFlat_6ykex")
+theme = ExtResource("2_dl4mi")
 script = ExtResource("2_18266")
 
 [node name="EnemyParent" type="Control" parent="."]
@@ -148,7 +152,7 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer2/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Score"
+text = "Items"
 
 [node name="Score" type="RichTextLabel" parent="MarginContainer2/Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)

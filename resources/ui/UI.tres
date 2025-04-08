@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://8dcp3ixxoxk"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://8dcp3ixxoxk"]
 
 [sub_resource type="SystemFont" id="SystemFont_6i82i"]
 font_names = PackedStringArray("Satoshi", "Sans-Serif")
@@ -14,7 +14,14 @@ expand_margin_top = 8.0
 expand_margin_right = 8.0
 expand_margin_bottom = 8.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3e11"]
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
 [resource]
 Button/font_sizes/font_size = 48
 Button/fonts/font = SubResource("SystemFont_6i82i")
 Button/styles/normal = SubResource("StyleBoxFlat_5gh12")
+Panel/styles/panel = SubResource("StyleBoxFlat_i3e11")
