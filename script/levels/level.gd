@@ -31,6 +31,8 @@ func renderDice() -> void:
 		dice_parent.add_child(child)
 		dice_num += 1
 		
+	
+		
 func renderHeroCard() -> void:
 	for i:int in range(HeroGlobal.active_hero.size()):
 		var child: HeroCard = HeroGlobal.active_hero[i]
@@ -38,7 +40,6 @@ func renderHeroCard() -> void:
 		hero_card_parent.add_child(child)
 		
 func renderEnemy() -> void:
-	EnemiesGlobal.add_enemy()
 	var child: Enemy = EnemiesGlobal.active_enemy
 	enemy_parent.add_child(child)
 		
@@ -101,5 +102,9 @@ func _process(delta: float) -> void:
 		#renderDice()  # Recalculate positions on resize
 
 
-func _on_damage_button_pressed() -> void:
-	EnemiesGlobal.damage_enemy(1)
+func _on_next_level_button_pressed() -> void:
+	GameManager.initNewLevel()
+
+
+func _on_button_pressed() -> void:
+	GameManager.attack()

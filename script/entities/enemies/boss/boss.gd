@@ -10,7 +10,6 @@ extends Node
 
 func _process(delta: float) -> void:
 	if needs_update:
-		print_debug(boss_resource)
 		$Sprite2D.texture = boss_resource.texture
 		needs_update = false
 		

@@ -9,10 +9,10 @@ const HERO_CARD_SCENE = preload("res://scenes/characters/HeroCard.tscn")
 
 var active_hero: Array[HeroCard] = []
 
-func _ready() -> void:
-	print_debug("warrior resource loaded:", warrior)
-	print_debug(HERO_TYPE.WARRIOR)
-	print_debug(HERO_TYPE.find_key(HERO_TYPE.WARRIOR))
+#func _ready() -> void:
+	#print_debug("warrior resource loaded:", warrior)
+	#print_debug(HERO_TYPE.WARRIOR)
+	#print_debug(HERO_TYPE.find_key(HERO_TYPE.WARRIOR))
 
 
 func add_hero(hero_type: HERO_TYPE) -> void:

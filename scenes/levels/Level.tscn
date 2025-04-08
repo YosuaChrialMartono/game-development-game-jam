@@ -65,6 +65,14 @@ layout_mode = 2
 size_flags_vertical = 0
 bbcode_enabled = true
 
+[node name="NextLevelButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Next Level"
+
+[node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Roll"
+
 [node name="DiceParent" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -148,12 +156,5 @@ layout_mode = 2
 size_flags_vertical = 0
 bbcode_enabled = true
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 840.0
-offset_top = 480.0
-offset_right = 1008.0
-offset_bottom = 544.0
-text = "Damage enemy"
-
-[connection signal="pressed" from="Button" to="." method="_on_damage_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

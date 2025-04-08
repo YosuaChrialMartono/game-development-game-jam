@@ -42,7 +42,6 @@ func roll_dice() -> void:
 
 	var random_number = randi_range(1, 6)
 	var dice_roll_value = get_value(random_number)
-	print_debug(dice_roll_value)
 	animated_sprite.play(str(dice_roll_value))
 
 	# Ensure the label exists before modifying its text

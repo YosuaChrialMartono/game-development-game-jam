@@ -11,7 +11,7 @@ const BOSS_CARD_SCENE = preload("res://scenes/characters/Boss.tscn")
 
 var active_enemy: Enemy
 
-func add_enemy() -> void:
+func set_enemy() -> void:
 	var new_enemy = ENEMY_CARD_SCENE.instantiate()
 	# Load slime for now
 	var enemy_resource = slime_enemy

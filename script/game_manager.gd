@@ -2,9 +2,15 @@ extends Node
 
 @onready var is_rolling = false
 
+@onready var hp: int = 10
+@onready var shield: int = 0 
+
+@onready var level: int = 1
+@onready var level_modifier = 2
+const LEVEL_SCENE = preload("res://scenes/levels/Level.tscn")
+
 func rollDice() -> void:
 	is_rolling = true  # Lock rolling
-	print_debug(DiceGlobal.active_dice)
 	for dice:Dice in DiceGlobal.active_dice:
 		dice.roll_dice()
 	is_rolling = false  # Unlock rolling after completion
@@ -21,8 +27,6 @@ func calculateDamage() -> int:
 	for value in DiceGlobal.dice_value:
 		if value is int:
 			continue
-		print_debug(value)
-		print_debug(total_value)
 		if value == "x1":
 			total_value = total_value * 1
 		elif  value == "x2":
@@ -30,12 +34,16 @@ func calculateDamage() -> int:
 		elif value == "x3":
 			total_value = total_value * 3
 	
-	print_debug(total_value)
 	return total_value
 	
-func _process(delta) -> void:
-	# Ensure input is only detected once per press
-	if Input.is_action_just_pressed("ui_accept") and not is_rolling:
+func initNewLevel() -> void:
+	level += 1
+	EnemiesGlobal.set_enemy()
+	var enemy = EnemiesGlobal.active_enemy
+	enemy.enemy_resource.hp = hp * (level_modifier * level)
+	
+func attack():
+	if not is_rolling:
 		DiceGlobal.reset_dice_value()
 		print_debug("rolling dice")
 		rollDice()
@@ -44,12 +52,15 @@ func _process(delta) -> void:
 		
 		var damage = calculateDamage()
 		EnemiesGlobal.damage_enemy(damage)
+	
+#func _process(delta) -> void:
+	# Ensure input is only detected once per press
+
 
 func _ready() -> void:
 	DiceGlobal.add_dice(Dice.DICE_TYPE.NUMBER)
 	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
 	DiceGlobal.add_dice(Dice.DICE_TYPE.MULTIPLIER)
-	
 	
 	HeroGlobal.add_hero(HeroGlobal.HERO_TYPE.WARRIOR)
 	HeroGlobal.add_hero(HeroGlobal.HERO_TYPE.WARRIOR)
