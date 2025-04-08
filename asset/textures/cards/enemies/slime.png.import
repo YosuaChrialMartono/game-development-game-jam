@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwryavtvebome"
-path="res://.godot/imported/Card-3.png-598b7edde410a0f4d8aab522637403fa.ctex"
+uid="uid://bxnnpr5ykqqp5"
+path="res://.godot/imported/slime.png-255df932d882c7de6e6fe13d11e59f43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/textures/Card-3.png"
-dest_files=["res://.godot/imported/Card-3.png-598b7edde410a0f4d8aab522637403fa.ctex"]
+source_file="res://asset/textures/cards/enemies/slime.png"
+dest_files=["res://.godot/imported/slime.png-255df932d882c7de6e6fe13d11e59f43.ctex"]
 
 [params]
 

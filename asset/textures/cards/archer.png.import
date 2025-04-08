@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbucgypv8f5l1"
-path="res://.godot/imported/monsters 1.png-46b1eb4fc95a7af57be93240f517be54.ctex"
+uid="uid://bwryavtvebome"
+path="res://.godot/imported/archer.png-2879c4f17eef02eed51696d4e85a53ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/textures/enemies/monsters 1.png"
-dest_files=["res://.godot/imported/monsters 1.png-46b1eb4fc95a7af57be93240f517be54.ctex"]
+source_file="res://asset/textures/cards/archer.png"
+dest_files=["res://.godot/imported/archer.png-2879c4f17eef02eed51696d4e85a53ef.ctex"]
 
 [params]
 

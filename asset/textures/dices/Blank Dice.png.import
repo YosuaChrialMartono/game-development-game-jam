@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyyapxr3fqpd3"
-path="res://.godot/imported/monsters 2.png-9d91f6c4467113dce81be1e46e451176.ctex"
+uid="uid://0cktln1a8vig"
+path="res://.godot/imported/Blank Dice.png-89803d5fe5bbc549cde420c44f5503bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/textures/enemies/monsters 2.png"
-dest_files=["res://.godot/imported/monsters 2.png-9d91f6c4467113dce81be1e46e451176.ctex"]
+source_file="res://asset/textures/dices/Blank Dice.png"
+dest_files=["res://.godot/imported/Blank Dice.png-89803d5fe5bbc549cde420c44f5503bc.ctex"]
 
 [params]
 

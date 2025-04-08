@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://fuyl8ra7m2ne"]
 
 [ext_resource type="Script" path="res://script/entities/enemies/enemies.gd" id="1_my5t8"]
-[ext_resource type="Texture2D" uid="uid://d37ps6m3vhws5" path="res://asset/textures/enemies/goblin warrior.png" id="2_u8ax4"]
+[ext_resource type="Texture2D" uid="uid://d37ps6m3vhws5" path="res://asset/textures/cards/enemies/goblin_warrior.png" id="2_u8ax4"]
 
 [node name="Enemies" type="Node2D"]
 script = ExtResource("1_my5t8")

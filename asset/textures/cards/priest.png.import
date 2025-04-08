@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvsvtp55k2qxv"
-path="res://.godot/imported/Card-4.png-693155788847c26f2dc23d76381a7228.ctex"
+uid="uid://bvko5ywn35lcp"
+path="res://.godot/imported/priest.png-15e9ce30439215e84e322d5f3ead7908.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/textures/Card-4.png"
-dest_files=["res://.godot/imported/Card-4.png-693155788847c26f2dc23d76381a7228.ctex"]
+source_file="res://asset/textures/cards/priest.png"
+dest_files=["res://.godot/imported/priest.png-15e9ce30439215e84e322d5f3ead7908.ctex"]
 
 [params]
 

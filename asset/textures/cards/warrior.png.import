@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvko5ywn35lcp"
-path="res://.godot/imported/Card-1.png-1d98b34a29dd391c98edfeffe0574ce5.ctex"
+uid="uid://0jf14tl4bnu3"
+path="res://.godot/imported/warrior.png-0057fcb8d5a65e1c930d61bdb7968943.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/textures/Card-1.png"
-dest_files=["res://.godot/imported/Card-1.png-1d98b34a29dd391c98edfeffe0574ce5.ctex"]
+source_file="res://asset/textures/cards/warrior.png"
+dest_files=["res://.godot/imported/warrior.png-0057fcb8d5a65e1c930d61bdb7968943.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://gldl77cc833d"]
 
 [ext_resource type="Script" path="res://script/entities/heroes/heroCard.gd" id="1_3iy1s"]
-[ext_resource type="Texture2D" uid="uid://bvko5ywn35lcp" path="res://asset/textures/Card-1.png" id="2_rebac"]
+[ext_resource type="Texture2D" uid="uid://bvko5ywn35lcp" path="res://asset/textures/cards/priest.png" id="2_rebac"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ea4ys"]
 bg_color = Color(0.176419, 0.176419, 0.176419, 1)

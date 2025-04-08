@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgujamfjbwf8c"
-path="res://.godot/imported/monsters 3.png-af543686b381129ad51ab13433c8d1e7.ctex"
+uid="uid://4whxdv6i43au"
+path="res://.godot/imported/goblin_swordsman.png-03e679ec7acb8aabe23bdb0a91270900.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/textures/enemies/monsters 3.png"
-dest_files=["res://.godot/imported/monsters 3.png-af543686b381129ad51ab13433c8d1e7.ctex"]
+source_file="res://asset/textures/cards/enemies/goblin_swordsman.png"
+dest_files=["res://.godot/imported/goblin_swordsman.png-03e679ec7acb8aabe23bdb0a91270900.ctex"]
 
 [params]
 
