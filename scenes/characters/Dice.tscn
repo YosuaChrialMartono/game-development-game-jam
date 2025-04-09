@@ -126,21 +126,21 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1gwaf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk15k"]
 atlas = ExtResource("2_7eweb")
-region = Rect2(131, 131, 128, 128)
+region = Rect2(0, 130, 131, 130)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n8q8v"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8aew"]
 atlas = ExtResource("2_7eweb")
-region = Rect2(393, 131, 128, 128)
+region = Rect2(262, 130, 131, 130)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_va3bl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx8eg"]
 atlas = ExtResource("2_7eweb")
-region = Rect2(655, 131, 128, 128)
+region = Rect2(393, 130, 131, 130)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1bqwt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vw1n8"]
 atlas = ExtResource("2_7eweb")
-region = Rect2(0, 0, 131, 130)
+region = Rect2(0, 130, 131, 130)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xtw54"]
 atlas = ExtResource("2_7eweb")
@@ -162,13 +162,13 @@ region = Rect2(655, 131, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1gwaf")
+"texture": SubResource("AtlasTexture_tk15k")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n8q8v")
+"texture": SubResource("AtlasTexture_v8aew")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_va3bl")
+"texture": SubResource("AtlasTexture_mx8eg")
 }],
 "loop": true,
 "name": &"default",
@@ -176,7 +176,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1bqwt")
+"texture": SubResource("AtlasTexture_vw1n8")
 }],
 "loop": true,
 "name": &"x1",
@@ -321,7 +321,7 @@ frame_progress = 0.904792
 [node name="MultiplierDiceSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_nc7w0")
-animation = &"x3"
+animation = &"x1.5"
 
 [node name="ElementalDiceSprite" type="AnimatedSprite2D" parent="."]
 visible = false

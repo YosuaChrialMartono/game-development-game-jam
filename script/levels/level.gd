@@ -17,8 +17,9 @@ extends Node
 @onready var hero_card_hand = $CardManager/Hand
 
 @onready var enemy_name: Label = $EnemyInfo/EnemyName
-@onready var hp_bar: ProgressBar = $EnemyInfo/HPBar
-@onready var shield_bar: ProgressBar = $EnemyInfo/ShieldBar
+@onready var hp_value_label: Label = $EnemyInfo/HPValueLabel
+@onready var shield_value_label: Label = $EnemyInfo/ShieldValueLabel
+
 
 @onready var attack_point_label: Label = $"MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage/Panel/AttackPointLabel"
 @onready var mult_point_label: Label = $"MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage/Panel2/MultPointLabel"
@@ -51,8 +52,7 @@ func _renderEnemy() -> void:
 
 func _setup_enemy_info():
 	enemy_name.text = EnemiesGlobal.active_enemy.enemy_resource.name
-	hp_bar.max_value = EnemiesGlobal.active_enemy.enemy_resource.hp
-	hp_bar.value = EnemiesGlobal.active_enemy.enemy_resource.hp
+	hp_value_label.text = str(EnemiesGlobal.active_enemy.enemy_resource.hp)
 	
 func _ready() -> void:
 	print_debug("level ready")
@@ -73,8 +73,7 @@ func _ready() -> void:
 
 func _on_next_level_button_pressed() -> void:
 	GameManager.initNewLevel()
-	hp_bar.max_value = EnemiesGlobal.active_enemy.enemy_resource.hp
-	hp_bar.value = EnemiesGlobal.active_enemy.enemy_resource.hp
+	hp_value_label.text = str(EnemiesGlobal.active_enemy.enemy_resource.hp)
 
 
 func _on_button_pressed() -> void:
@@ -82,7 +81,7 @@ func _on_button_pressed() -> void:
 	
 	await get_tree().create_timer(1.0).timeout
 	
-	hp_bar.value = EnemiesGlobal.active_enemy.enemy_resource.hp
+	hp_value_label.text = str(EnemiesGlobal.active_enemy.enemy_resource.hp)
 	
 	attack_point_label.text = str(GameManager.attack_point_value)
 	mult_point_label.text = str(GameManager.mult_point_value)

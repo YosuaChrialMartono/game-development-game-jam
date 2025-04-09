@@ -10,9 +10,3 @@ script = ExtResource("1_my5t8")
 position = Vector2(1.54972e-06, 128)
 scale = Vector2(1.02924, 1)
 texture = ExtResource("2_u8ax4")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -16.0
-offset_top = 272.0
-offset_right = 24.0
-offset_bottom = 295.0

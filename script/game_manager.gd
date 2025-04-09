@@ -67,6 +67,8 @@ func attack():
 		
 		var damage = calculateDamage()
 		EnemiesGlobal.damage_enemy(damage)
+		if EnemiesGlobal.active_enemy.enemy_resource.hp <= 0:
+			initNewLevel()
 	
 #func _process(delta) -> void:
 	# Ensure input is only detected once per press
@@ -77,5 +79,9 @@ func _ready() -> void:
 	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
 	DiceGlobal.add_dice(Dice.DICE_TYPE.MULTIPLIER)
 	
+	HeroGlobal.add_hero("warrior")
+	HeroGlobal.add_hero("warrior")
+	HeroGlobal.add_hero("warrior")
+	HeroGlobal.add_hero("warrior")
 	HeroGlobal.add_hero("warrior")
 	HeroGlobal.add_hero("priest")

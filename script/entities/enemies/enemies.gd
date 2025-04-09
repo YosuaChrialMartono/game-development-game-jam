@@ -12,4 +12,3 @@ func _process(delta: float) -> void:
 	if needs_update: 
 		$Sprite2D.texture = enemy_resource.texture
 		needs_update = false
-	$Label.text = str(enemy_resource.hp)
