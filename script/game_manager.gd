@@ -9,6 +9,9 @@ extends Node
 @onready var level_modifier = 2
 const LEVEL_SCENE = preload("res://scenes/levels/Level.tscn")
 
+var attack_point_value = 0
+var mult_point_value = 0
+
 func rollDice() -> void:
 	is_rolling = true # Lock rolling
 	for dice: Dice in DiceGlobal.active_dice:
@@ -16,31 +19,37 @@ func rollDice() -> void:
 	is_rolling = false # Unlock rolling after completion
 	
 func calculateDamage() -> int:
-	var total_value = 0
+	var attack_point = 0
+	var mult_point = 0
+
 	# Count all number dice value
 	for value in DiceGlobal.dice_value:
 		if value is int:
-			total_value += int(value)
+			attack_point += int(value)
 	
 	# Count all hero value
 	for hero in HeroGlobal.active_hero:
 		var hero_info = HeroGlobal.get_hero_info(hero)
 		hero_info = hero_info["info"]
 		if hero_info.has("attack"):
-			total_value += hero_info["attack"]
+			attack_point += hero_info["attack"]
+
 
 	# Multiply all value
 	for value in DiceGlobal.dice_value:
 		if value is int:
 			continue
 		if value == "x1":
-			total_value = total_value * 1
+			mult_point = 1
 		elif value == "x2":
-			total_value = total_value * 2
+			mult_point = 2
 		elif value == "x3":
-			total_value = total_value * 3
+			mult_point = 3
 	
-	return total_value
+	attack_point_value = attack_point
+	mult_point_value = mult_point
+
+	return attack_point * mult_point
 	
 func initNewLevel() -> void:
 	level += 1

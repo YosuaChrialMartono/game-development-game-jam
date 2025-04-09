@@ -1,6 +1,5 @@
 extends Node
 
-@onready var score = $MarginContainer/Panel/MarginContainer/VBoxContainer/Score
 @onready var dice_parent: Panel = $DiceParent
 @onready var enemy_parent: Control = $EnemyParent
 
@@ -20,6 +19,10 @@ extends Node
 @onready var enemy_name: Label = $EnemyInfo/EnemyName
 @onready var hp_bar: ProgressBar = $EnemyInfo/HPBar
 @onready var shield_bar: ProgressBar = $EnemyInfo/ShieldBar
+
+@onready var attack_point_label: Label = $"MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage/Panel/AttackPointLabel"
+@onready var mult_point_label: Label = $"MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage/Panel2/MultPointLabel"
+@onready var total_attack_damage: Label = $MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/Panel/TotalAttackDamage
 
 const DICE_SCENE = preload("res://scenes/characters/Dice.tscn")
 
@@ -64,11 +67,8 @@ func _ready() -> void:
 	_renderEnemy()
 	_setup_enemy_info()
 
-func _process(_delta: float) -> void:
-	var valueText = ""
-	for value in DiceGlobal.dice_value:
-		valueText += str(value) + " "
-	score.text = "[center]%s[/center]" % valueText
+#func _process(_delta: float) -> void:
+	
 
 
 func _on_next_level_button_pressed() -> void:
@@ -83,3 +83,7 @@ func _on_button_pressed() -> void:
 	await get_tree().create_timer(1.0).timeout
 	
 	hp_bar.value = EnemiesGlobal.active_enemy.enemy_resource.hp
+	
+	attack_point_label.text = str(GameManager.attack_point_value)
+	mult_point_label.text = str(GameManager.mult_point_value)
+	total_attack_damage.text = str(GameManager.attack_point_value * GameManager.mult_point_value)

@@ -4,7 +4,6 @@
 [ext_resource type="Theme" uid="uid://8dcp3ixxoxk" path="res://resources/ui/UI.tres" id="2_dl4mi"]
 [ext_resource type="Texture2D" uid="uid://bfgtua4wspt4a" path="res://asset/textures/tiles.png" id="2_jf24m"]
 [ext_resource type="PackedScene" uid="uid://c7u8hryloq7hy" path="res://addons/card-framework/card_manager.tscn" id="3_d1wcv"]
-[ext_resource type="StyleBox" uid="uid://cyy7pvv13qvtb" path="res://resources/ui/secondary_panel.tres" id="4_0i1pl"]
 [ext_resource type="Texture2D" uid="uid://dm2jreyeeqp7o" path="res://asset/textures/cards/Card-back.png" id="4_osc3f"]
 [ext_resource type="PackedScene" uid="uid://bkpjlq7ggckg6" path="res://addons/card-framework/hand.tscn" id="5_mjs7d"]
 
@@ -156,6 +155,9 @@ physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_usdij")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifuok"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+
 [sub_resource type="GDScript" id="GDScript_qfxnm"]
 script/source = "class_name HeroCardHand
 extends Panel
@@ -225,43 +227,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 32
 
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_dl4mi")
+text = "Score"
+
+[node name="Score" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+
 [node name="NextLevelButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Next Level"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_dl4mi")
-text = "Damage"
-
-[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4_0i1pl")
-
-[node name="TotalAttackDamage" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -36.0
-offset_right = 96.0
-offset_bottom = 36.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_dl4mi")
-theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
 
 [node name="Attack Damage" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -272,7 +252,7 @@ custom_minimum_size = Vector2(84, 84)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_dl4mi")
-theme_override_styles/panel = ExtResource("4_0i1pl")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ifuok")
 
 [node name="AttackPointLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage/Panel"]
 layout_mode = 1
@@ -287,8 +267,6 @@ offset_right = 43.0
 offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_dl4mi")
-theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -303,7 +281,7 @@ custom_minimum_size = Vector2(84, 84)
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("2_dl4mi")
-theme_override_styles/panel = ExtResource("4_0i1pl")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ifuok")
 
 [node name="MultPointLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage/Panel2"]
 layout_mode = 1
@@ -318,8 +296,6 @@ offset_right = 42.0
 offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_dl4mi")
-theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
