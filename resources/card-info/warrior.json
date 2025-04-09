@@ -1,6 +1,7 @@
 {
-	"name": "warrior",
-	"front_image": "warrior.png",
-	"hp": 10,
-	"type": "physical"
+  "name": "warrior",
+  "front_image": "warrior.png",
+  "hp": 10,
+  "type": "physical",
+  "attack": 100
 }

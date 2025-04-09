@@ -24,26 +24,21 @@ extends Node
 const DICE_SCENE = preload("res://scenes/characters/Dice.tscn")
 
 func _renderDice() -> void:
-	var dice_count = DiceGlobal.active_dice.size()
 	var spacing = 150
 	
-	# Calculate starting x position so dice are centered
-	var total_width = (dice_count * Dice.SIZE.x) + (dice_count - 1) * spacing
 	#var start_x = (x - total_width) / 2  # Centering logic
 	
 	var dice_num = 0
 	for dice in DiceGlobal.active_dice:
 		var child = dice
-		dice.position = Vector2( 128 + dice_num * spacing, dice_parent.size.y / 2)  # 70% down the screen
+		dice.position = Vector2(128 + dice_num * spacing, dice_parent.size.y / 2) # 70% down the screen
 		child.name = "Dice" + str(dice_num)
 		dice_parent.add_child(child)
 		dice_num += 1
 		
 	
-		
 func _renderHeroCard() -> void:
-	var hero_card_list = ["warrior","warrior","warrior","warrior","warrior", "slime"]
-	for card in hero_card_list:
+	for card in HeroGlobal.active_hero:
 		card_factory.create_card(card, hero_card_hand)
 
 func _renderEnemy() -> void:
@@ -69,7 +64,7 @@ func _ready() -> void:
 	_renderEnemy()
 	_setup_enemy_info()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var valueText = ""
 	for value in DiceGlobal.dice_value:
 		valueText += str(value) + " "

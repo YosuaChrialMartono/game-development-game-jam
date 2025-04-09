@@ -1,0 +1,6 @@
+{
+  "name": "priest",
+  "front_image": "priest.png",
+  "hp": 10,
+  "type": "range"
+}

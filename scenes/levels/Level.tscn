@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://brg5dfwudp3c7"]
+[gd_scene load_steps=13 format=4 uid="uid://brg5dfwudp3c7"]
 
 [ext_resource type="Script" path="res://script/levels/level.gd" id="1_y3gc1"]
 [ext_resource type="Theme" uid="uid://8dcp3ixxoxk" path="res://resources/ui/UI.tres" id="2_dl4mi"]
@@ -160,8 +160,6 @@ script/source = "class_name HeroCardHand
 extends Panel
 "
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xcnm"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gld0q"]
 bg_color = Color(0.817521, 0.817521, 0.817521, 1)
 border_width_left = 2
@@ -293,7 +291,7 @@ offset_left = 1088.0
 offset_top = 32.0
 offset_right = 1344.0
 offset_bottom = 288.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_3xcnm")
+theme = ExtResource("2_dl4mi")
 
 [node name="EnemyName" type="Label" parent="EnemyInfo"]
 layout_mode = 0
