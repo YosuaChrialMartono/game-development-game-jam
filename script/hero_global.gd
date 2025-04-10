@@ -4,6 +4,8 @@ var hero_card_dict = {}
 var avail_hero_cards = []
 var hero_card_info_dir: String = "res://resources/card-info"
 
+var max_hero_hand_size = 5
+
 
 const HERO_CARD_SCENE = preload("res://scenes/characters/HeroCard.tscn")
 @onready var warrior = load("res://resources/heroes/warrior.tres") as BaseHeroResource

@@ -3,6 +3,7 @@ extends Node
 @onready var _is_rolling = false
 
 @onready var _level: int = 0
+@onready var win_level: int = 8
 @onready var _level_modifier = 2
 const LEVEL_SCENE = preload("res://scenes/levels/Level.tscn")
 

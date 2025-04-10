@@ -1,12 +1,14 @@
 extends Node
 
-const INIT_NUMBER_VALUES = [1,2,3,4,5,6]
+const INIT_NUMBER_VALUES = [1, 2, 3, 4, 5, 6]
 const INIT_MULTIPLIER_VALUES = ["x1", "x2", "x3"]
 const INIT_ELEMENT_VALUES = ["FIRE", "ICE", "EARTH", "AIR"]
 
 const DICE_SCENE = preload("res://scenes/characters/Dice.tscn")
 
 var active_dice: Array = []
+
+var max_dice_hand_size = 3
 
 func add_dice(dice_type: Dice.DICE_TYPE) -> void:
 	var new_dice = DICE_SCENE.instantiate()

@@ -459,7 +459,7 @@ size_flags_vertical = 10
 theme = ExtResource("2_dl4mi")
 theme_override_styles/panel = ExtResource("4_0i1pl")
 
-[node name="Label" type="Label" parent="DiceHandSize"]
+[node name="DiceHandSizeLabel" type="Label" parent="DiceHandSize"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -471,7 +471,7 @@ text = "3/3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DiceHandSize2" type="Panel" parent="."]
+[node name="HeroHandSize" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.312
@@ -488,7 +488,7 @@ size_flags_vertical = 10
 theme = ExtResource("2_dl4mi")
 theme_override_styles/panel = ExtResource("4_0i1pl")
 
-[node name="Label" type="Label" parent="DiceHandSize2"]
+[node name="HeroHandSizeLabel" type="Label" parent="HeroHandSize"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

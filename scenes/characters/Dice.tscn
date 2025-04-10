@@ -311,17 +311,20 @@ position = Vector2(64, 0)
 texture = ExtResource("3_1pf5s")
 
 [node name="NumberDiceSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(65, 0)
 sprite_frames = SubResource("SpriteFrames_monup")
 frame = 2
 frame_progress = 0.904792
 
 [node name="MultiplierDiceSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(65, 0)
 sprite_frames = SubResource("SpriteFrames_nc7w0")
 animation = &"x1.5"
 
 [node name="ElementalDiceSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(65, 0)
 sprite_frames = SubResource("SpriteFrames_r718c")
 animation = &"ICE"
