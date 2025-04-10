@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://brg5dfwudp3c7"]
+[gd_scene load_steps=14 format=4 uid="uid://brg5dfwudp3c7"]
 
 [ext_resource type="Script" path="res://script/levels/level.gd" id="1_y3gc1"]
 [ext_resource type="Theme" uid="uid://8dcp3ixxoxk" path="res://resources/ui/UI.tres" id="2_dl4mi"]
@@ -7,6 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://cyy7pvv13qvtb" path="res://resources/ui/secondary_panel.tres" id="4_0i1pl"]
 [ext_resource type="Texture2D" uid="uid://dm2jreyeeqp7o" path="res://asset/textures/cards/Card-back.png" id="4_osc3f"]
 [ext_resource type="PackedScene" uid="uid://bkpjlq7ggckg6" path="res://addons/card-framework/hand.tscn" id="5_mjs7d"]
+[ext_resource type="SystemFont" uid="uid://bw5yqtdhe4yv7" path="res://resources/ui/font.tres" id="5_ycxih"]
 
 [sub_resource type="Curve" id="Curve_y8j7x"]
 _data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.0, 0.0, 0, 0]
@@ -219,20 +220,20 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Next Level"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="LevelContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/LevelContainer"]
 layout_mode = 2
 theme = ExtResource("2_dl4mi")
-text = "Damage"
+text = "Level"
 
-[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/LevelContainer"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_0i1pl")
 
-[node name="TotalAttackDamage" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/Panel"]
+[node name="CurrentLevelLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/LevelContainer/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -252,18 +253,51 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Attack Damage" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="TotalDamageContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TotalDamageContainer"]
+layout_mode = 2
+theme = ExtResource("2_dl4mi")
+text = "Damage"
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TotalDamageContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_0i1pl")
+
+[node name="TotalAttackDamage" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TotalDamageContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -36.0
+offset_right = 96.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dl4mi")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="AttackDamageCalculatorContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage"]
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/AttackDamageCalculatorContainer"]
 custom_minimum_size = Vector2(84, 84)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_dl4mi")
 theme_override_styles/panel = ExtResource("4_0i1pl")
 
-[node name="AttackPointLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage/Panel"]
+[node name="AttackPointLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/AttackDamageCalculatorContainer/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -283,18 +317,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage"]
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/AttackDamageCalculatorContainer"]
 layout_mode = 2
 text = "X"
 
-[node name="Panel2" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage"]
+[node name="Panel2" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/AttackDamageCalculatorContainer"]
 custom_minimum_size = Vector2(84, 84)
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("2_dl4mi")
 theme_override_styles/panel = ExtResource("4_0i1pl")
 
-[node name="MultPointLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage/Panel2"]
+[node name="MultPointLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/AttackDamageCalculatorContainer/Panel2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -314,21 +348,157 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="PlayerInfo" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/PlayerInfo"]
+layout_mode = 2
+theme = ExtResource("2_dl4mi")
+text = "Player"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/PlayerInfo"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/PlayerInfo/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_dl4mi")
+text = "Health"
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/PlayerInfo/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("4_0i1pl")
+
+[node name="PlayerHealthLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/PlayerInfo/HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -36.0
+offset_right = 96.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dl4mi")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PlayerShieldContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/PlayerInfo"]
+layout_mode = 2
+
+[node name="PlayerShield" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/PlayerInfo/PlayerShieldContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_dl4mi")
+text = "Shield"
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/PlayerInfo/PlayerShieldContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("4_0i1pl")
+
+[node name="PlayerShieldLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/PlayerInfo/PlayerShieldContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -36.0
+offset_right = 96.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dl4mi")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="DiceParent" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.315
+anchor_top = 0.83
+anchor_right = 0.315
+anchor_bottom = 0.83
+offset_left = -260.8
+offset_top = -136.4
+offset_right = 259.2
+offset_bottom = 135.6
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 10
+theme = ExtResource("2_dl4mi")
+
+[node name="DiceHandSize" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.312
 anchor_top = 0.911
 anchor_right = 0.312
 anchor_bottom = 0.911
-offset_left = -255.04
-offset_top = -151.88
+offset_left = 152.96
+offset_top = -279.88
 offset_right = 264.96
-offset_bottom = 48.12
+offset_bottom = -247.88
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 10
 theme = ExtResource("2_dl4mi")
+theme_override_styles/panel = ExtResource("4_0i1pl")
+
+[node name="Label" type="Label" parent="DiceHandSize"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_ycxih")
+text = "3/3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiceHandSize2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312
+anchor_top = 0.911
+anchor_right = 0.312
+anchor_bottom = 0.911
+offset_left = 824.96
+offset_top = -279.88
+offset_right = 936.96
+offset_bottom = -247.88
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 10
+theme = ExtResource("2_dl4mi")
+theme_override_styles/panel = ExtResource("4_0i1pl")
+
+[node name="Label" type="Label" parent="DiceHandSize2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_ycxih")
+text = "3/3"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HeroCardParent" type="Panel" parent="."]
 custom_minimum_size = Vector2(640, 200)
@@ -339,7 +509,7 @@ anchor_top = 0.83
 anchor_right = 0.467
 anchor_bottom = 0.83
 offset_left = -0.640015
-offset_top = -64.4
+offset_top = -136.4
 offset_right = 639.36
 offset_bottom = 135.6
 grow_horizontal = 2
@@ -473,7 +643,7 @@ offset_top = 80.0
 offset_right = 284.0
 offset_bottom = 122.0
 theme_override_font_sizes/font_size = 24
-text = "Roll"
+text = "End turn"
 
 [node name="CardManager" parent="." instance=ExtResource("3_d1wcv")]
 card_asset_dir = "res://asset/textures/cards"

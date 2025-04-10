@@ -8,7 +8,7 @@ extends Node
 		
 @export var needs_update := false
 
-func _process(delta: float) -> void:
-	if needs_update: 
+func _process(_delta: float) -> void:
+	if needs_update:
 		$Sprite2D.texture = enemy_resource.texture
 		needs_update = false

@@ -22,6 +22,7 @@ HeroGlobal="*res://script/hero_global.gd"
 UpgradeGlobal="*res://script/upgrade_global.gd"
 EnemiesGlobal="*res://script/enemies_global.gd"
 GameManager="*res://script/game_manager.gd"
+PlayersGlobal="*res://script/players_global.gd"
 
 [display]
 

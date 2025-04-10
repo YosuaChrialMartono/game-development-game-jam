@@ -1,22 +1,19 @@
 extends Node
 
-@onready var is_rolling = false
+@onready var _is_rolling = false
 
-@onready var hp: int = 10
-@onready var shield: int = 0
-
-@onready var level: int = 0
-@onready var level_modifier = 2
+@onready var _level: int = 0
+@onready var _level_modifier = 2
 const LEVEL_SCENE = preload("res://scenes/levels/Level.tscn")
 
 var attack_point_value = 0
 var mult_point_value = 0
 
-func rollDice() -> void:
-	is_rolling = true # Lock rolling
+func _rollDice() -> void:
+	_is_rolling = true # Lock rolling
 	for dice: Dice in DiceGlobal.active_dice:
 		dice.roll_dice()
-	is_rolling = false # Unlock rolling after completion
+	_is_rolling = false # Unlock rolling after completion
 	
 func calculateDamage() -> int:
 	var attack_point = 0
@@ -52,36 +49,48 @@ func calculateDamage() -> int:
 	return attack_point * mult_point
 	
 func initNewLevel() -> void:
-	level += 1
+	_level += 1
 	EnemiesGlobal.set_enemy()
-	var enemy = EnemiesGlobal.active_enemy
-	enemy.enemy_resource.hp = hp * (level_modifier * level)
+	var enemyHP = EnemiesGlobal.get_enemy_hp()
+	print_debug(enemyHP)
+	EnemiesGlobal.set_enemy_hp(enemyHP * (_level_modifier * _level))
 	
-func attack():
-	if not is_rolling:
+func player_attack():
+	if not _is_rolling:
 		DiceGlobal.reset_dice_value()
 		print_debug("rolling dice")
-		rollDice()
+		_rollDice()
 		
 		await get_tree().create_timer(1.0).timeout
 		
 		var damage = calculateDamage()
 		EnemiesGlobal.damage_enemy(damage)
-		if EnemiesGlobal.active_enemy.enemy_resource.hp <= 0:
-			initNewLevel()
 	
+func enemies_attack():
+	PlayersGlobal.damagePlayer(EnemiesGlobal.active_enemy.enemy_resource.attack_damage)
+
+func get_current_level() -> int:
+	return _level
+
+func end_turn():
+	player_attack()
+	await get_tree().create_timer(1.0).timeout
+	if EnemiesGlobal.get_enemy_hp() <= 0:
+		initNewLevel()
+	else:
+		enemies_attack()
+
+
 #func _process(delta) -> void:
 	# Ensure input is only detected once per press
-
-
 func _ready() -> void:
 	DiceGlobal.add_dice(Dice.DICE_TYPE.NUMBER)
 	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
 	DiceGlobal.add_dice(Dice.DICE_TYPE.MULTIPLIER)
 	
-	HeroGlobal.add_hero("warrior")
-	HeroGlobal.add_hero("warrior")
-	HeroGlobal.add_hero("warrior")
-	HeroGlobal.add_hero("warrior")
-	HeroGlobal.add_hero("warrior")
+	# HeroGlobal.add_hero("warrior")
+	# HeroGlobal.add_hero("warrior")
+	# HeroGlobal.add_hero("warrior")
+	# HeroGlobal.add_hero("warrior")
+	# HeroGlobal.add_hero("warrior")
 	HeroGlobal.add_hero("priest")

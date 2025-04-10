@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="BaseEnemiesResource" load_steps=3 format=3 uid="uid://d20t88q0iuc8m"]
 
 [ext_resource type="Script" path="res://script/entities/enemies/base_enemies_resources.gd" id="1_q84qd"]
-[ext_resource type="Texture2D" uid="uid://bxnnpr5ykqqp5" path="res://asset/textures/enemies/slime.png" id="2_dg7la"]
+[ext_resource type="Texture2D" uid="uid://bxnnpr5ykqqp5" path="res://asset/textures/cards/enemies/slime.png" id="2_dg7la"]
 
 [resource]
 script = ExtResource("1_q84qd")
+name = ""
 hp = 10
+shield = 0
 attack_damage = 1
 texture = ExtResource("2_dg7la")

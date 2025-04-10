@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://kd7d61atmfss"]
+[gd_scene load_steps=36 format=3 uid="uid://kd7d61atmfss"]
 
 [ext_resource type="Script" path="res://script/entities/dice.gd" id="1_euvij"]
 [ext_resource type="Texture2D" uid="uid://d1ksdop1g7qwp" path="res://asset/textures/dices/Dice V1.png" id="2_7eweb"]
@@ -299,9 +299,6 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dvlxd"]
-size = Vector2(128, 128)
-
 [sub_resource type="SystemFont" id="SystemFont_prs81"]
 font_names = PackedStringArray("Helvetica Rounded")
 subpixel_positioning = 0
@@ -310,31 +307,28 @@ subpixel_positioning = 0
 script = ExtResource("1_euvij")
 
 [node name="BlankSprite" type="Sprite2D" parent="."]
+position = Vector2(64, 0)
 texture = ExtResource("3_1pf5s")
 
 [node name="NumberDiceSprite" type="AnimatedSprite2D" parent="."]
-visible = false
+position = Vector2(65, 0)
 sprite_frames = SubResource("SpriteFrames_monup")
 frame = 2
 frame_progress = 0.904792
 
 [node name="MultiplierDiceSprite" type="AnimatedSprite2D" parent="."]
-visible = false
+position = Vector2(65, 0)
 sprite_frames = SubResource("SpriteFrames_nc7w0")
 animation = &"x1.5"
 
 [node name="ElementalDiceSprite" type="AnimatedSprite2D" parent="."]
-visible = false
+position = Vector2(65, 0)
 sprite_frames = SubResource("SpriteFrames_r718c")
 animation = &"ICE"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_dvlxd")
-
 [node name="DiceScore" type="RichTextLabel" parent="."]
-offset_left = -19.0
+offset_left = 45.0
 offset_top = -119.0
-offset_right = 21.0
+offset_right = 85.0
 offset_bottom = -79.0
 theme_override_fonts/normal_font = SubResource("SystemFont_prs81")

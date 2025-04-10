@@ -16,26 +16,34 @@ extends Node
 @onready var hero_card_parent: Panel = $HeroCardParent
 @onready var hero_card_hand = $CardManager/Hand
 
+@onready var current_level_label: Label = $MarginContainer/Panel/MarginContainer/VBoxContainer/LevelContainer/Panel/CurrentLevelLabel
+
+@onready var player_health_label: Label = $MarginContainer/Panel/MarginContainer/VBoxContainer/PlayerInfo/HBoxContainer/Panel/PlayerHealthLabel
+@onready var player_shield_label: Label = $MarginContainer/Panel/MarginContainer/VBoxContainer/PlayerInfo/PlayerShieldContainer/Panel/PlayerShieldLabel
+
 @onready var enemy_name: Label = $EnemyInfo/EnemyName
-@onready var hp_value_label: Label = $EnemyInfo/HPValueLabel
-@onready var shield_value_label: Label = $EnemyInfo/ShieldValueLabel
+@onready var enemy_hp_value_label: Label = $EnemyInfo/HPValueLabel
+@onready var enemy_shield_value_label: Label = $EnemyInfo/ShieldValueLabel
 
+@onready var attack_point_label: Label = $MarginContainer/Panel/MarginContainer/VBoxContainer/AttackDamageCalculatorContainer/Panel/AttackPointLabel
+@onready var mult_point_label: Label = $MarginContainer/Panel/MarginContainer/VBoxContainer/AttackDamageCalculatorContainer/Panel2/MultPointLabel
+@onready var total_attack_damage: Label = $MarginContainer/Panel/MarginContainer/VBoxContainer/TotalDamageContainer/Panel/TotalAttackDamage
 
-@onready var attack_point_label: Label = $"MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage/Panel/AttackPointLabel"
-@onready var mult_point_label: Label = $"MarginContainer/Panel/MarginContainer/VBoxContainer/Attack Damage/Panel2/MultPointLabel"
-@onready var total_attack_damage: Label = $MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/Panel/TotalAttackDamage
 
 const DICE_SCENE = preload("res://scenes/characters/Dice.tscn")
 
 func _renderDice() -> void:
-	var spacing = 150
-	
-	#var start_x = (x - total_width) / 2  # Centering logic
+	var spacing = 56
+	var dice_width = 128
+	var total_dice_count = DiceGlobal.active_dice.size()
+	var total_width = total_dice_count * dice_width + (total_dice_count - 1) * spacing
+	var start_x = (dice_parent.size.x - total_width) / 2  # Centering logic
+	print_debug(start_x)
 	
 	var dice_num = 0
 	for dice in DiceGlobal.active_dice:
 		var child = dice
-		dice.position = Vector2(128 + dice_num * spacing, dice_parent.size.y / 2) # 70% down the screen
+		dice.position = Vector2(start_x + dice_num * (spacing + dice_width), dice_parent.size.y / 2)
 		child.name = "Dice" + str(dice_num)
 		dice_parent.add_child(child)
 		dice_num += 1
@@ -49,15 +57,21 @@ func _renderEnemy() -> void:
 	var child: Enemy = EnemiesGlobal.active_enemy
 	enemy_parent.add_child(child)
 
+func _setup_player_info():
+	player_health_label.text = str(PlayersGlobal.hp)
+	player_shield_label.text = str(PlayersGlobal.shield)
 
 func _setup_enemy_info():
 	enemy_name.text = EnemiesGlobal.active_enemy.enemy_resource.name
-	hp_value_label.text = str(EnemiesGlobal.active_enemy.enemy_resource.hp)
-	
+	enemy_hp_value_label.text = str(EnemiesGlobal.get_enemy_hp())
+	enemy_shield_value_label.text = str(EnemiesGlobal.get_enemy_shield())
+
 func _ready() -> void:
 	print_debug("level ready")
 	_renderDice()
 	
+	current_level_label.text = str(GameManager.get_current_level())
+
 	# Init dice value array with appropriate size
 	DiceGlobal.dice_value.resize(DiceGlobal.active_dice.size())
 	DiceGlobal.dice_value.fill(0)
@@ -66,23 +80,31 @@ func _ready() -> void:
 	
 	_renderEnemy()
 	_setup_enemy_info()
+	_setup_player_info()
 
 #func _process(_delta: float) -> void:
 	
 
-
 func _on_next_level_button_pressed() -> void:
 	GameManager.initNewLevel()
-	hp_value_label.text = str(EnemiesGlobal.active_enemy.enemy_resource.hp)
-
+	_update_level_state()
 
 func _on_button_pressed() -> void:
-	GameManager.attack()
+	GameManager.end_turn()
 	
 	await get_tree().create_timer(1.0).timeout
 	
-	hp_value_label.text = str(EnemiesGlobal.active_enemy.enemy_resource.hp)
+	_update_level_state()
+
+func _update_level_state():
+	enemy_hp_value_label.text = str(EnemiesGlobal.get_enemy_hp())
+	enemy_shield_value_label.text = str(EnemiesGlobal.get_enemy_shield())
 	
 	attack_point_label.text = str(GameManager.attack_point_value)
 	mult_point_label.text = str(GameManager.mult_point_value)
 	total_attack_damage.text = str(GameManager.attack_point_value * GameManager.mult_point_value)
+	
+	player_health_label.text = str(PlayersGlobal.hp)
+	player_shield_label.text = str(PlayersGlobal.shield)
+
+	current_level_label.text = str(GameManager.get_current_level())
