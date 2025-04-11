@@ -146,9 +146,9 @@ region = Rect2(0, 130, 131, 130)
 atlas = ExtResource("2_7eweb")
 region = Rect2(131, 131, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jtnpv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahvt8"]
 atlas = ExtResource("2_7eweb")
-region = Rect2(131, 0, 131, 130)
+region = Rect2(262, 130, 131, 130)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c30d1"]
 atlas = ExtResource("2_7eweb")
@@ -192,7 +192,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jtnpv")
+"texture": SubResource("AtlasTexture_ahvt8")
 }],
 "loop": true,
 "name": &"x2",
@@ -317,7 +317,7 @@ frame_progress = 0.904792
 visible = false
 position = Vector2(65, 64)
 sprite_frames = SubResource("SpriteFrames_nc7w0")
-animation = &"x1.5"
+animation = &"x2"
 
 [node name="ElementalDiceSprite" type="AnimatedSprite2D" parent="."]
 visible = false

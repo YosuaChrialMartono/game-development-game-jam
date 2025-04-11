@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlwfyaniu1f6c"]
+[gd_scene load_steps=6 format=3 uid="uid://dlwfyaniu1f6c"]
 
 [ext_resource type="Script" path="res://script/ui/main_menu.gd" id="1_b0we2"]
 [ext_resource type="Theme" uid="uid://8dcp3ixxoxk" path="res://resources/ui/UI.tres" id="2_hf28i"]
 [ext_resource type="PackedScene" uid="uid://3863xlfgk7or" path="res://scenes/ui/background.tscn" id="2_m2cm1"]
-[ext_resource type="Texture2D" uid="uid://s7se0rx2qn47" path="res://icon.svg" id="3_rrk3d"]
+[ext_resource type="Texture2D" uid="uid://m5h2uqmipwpl" path="res://asset/textures/Logo.png" id="4_n5wb2"]
+[ext_resource type="AudioStream" uid="uid://dyjuo0r0nuohx" path="res://asset/sounds/kenney_ui-audio/Audio/click2.ogg" id="5_0vbxs"]
 
 [node name="MainMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -50,11 +51,18 @@ theme_override_constants/margin_bottom = 32
 layout_mode = 2
 theme_override_constants/separation = 48
 
+[node name="Label" type="Label" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "Diceborn"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(320, 320)
 layout_mode = 2
 size_flags_horizontal = 6
-texture = ExtResource("3_rrk3d")
+texture = ExtResource("4_n5wb2")
 expand_mode = 2
 stretch_mode = 4
 
@@ -67,6 +75,9 @@ text = "New Game"
 layout_mode = 2
 theme = ExtResource("2_hf28i")
 text = "Exit"
+
+[node name="ButtonClick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_0vbxs")
 
 [connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

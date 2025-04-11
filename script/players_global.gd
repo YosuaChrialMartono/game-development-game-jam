@@ -7,7 +7,6 @@ var hp = BASE_HP
 var shield = BASE_SHIELD
 
 func damagePlayer(damage: int):
-	print_debug("Damaged Player %s"%damage)
 	if damage > shield:
 		var tanked_damage = damage - shield
 		shield -= damage - tanked_damage

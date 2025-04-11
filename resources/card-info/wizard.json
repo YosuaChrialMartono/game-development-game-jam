@@ -1,0 +1,7 @@
+{
+  "name": "wizard",
+  "front_image": "wizard.png",
+  "hp": 10,
+  "type": "magical",
+  "attack": 20
+}

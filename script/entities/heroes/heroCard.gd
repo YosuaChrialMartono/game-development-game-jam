@@ -12,7 +12,7 @@ enum DAMAGE_TYPE {
 const SIZE := Vector2(171, 256)
 
 @export var card_index: int
-@export var hero_resource : BaseHeroResource:
+@export var hero_resource: BaseHeroResource:
 	set(val):
 		hero_resource = val
 		needs_update = true
@@ -24,9 +24,8 @@ var helper = Helper.new()
 func _ready() -> void:
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if needs_update:
-		print_debug(hero_resource)
 		$Sprite2D.texture = hero_resource.texture
 		needs_update = false
 

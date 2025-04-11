@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://brg5dfwudp3c7"]
+[gd_scene load_steps=20 format=3 uid="uid://brg5dfwudp3c7"]
 
 [ext_resource type="Script" path="res://script/levels/level.gd" id="1_y3gc1"]
 [ext_resource type="Theme" uid="uid://8dcp3ixxoxk" path="res://resources/ui/UI.tres" id="2_dl4mi"]
@@ -12,6 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://bsclfru1qw70t" path="res://scenes/ui/LoseScene.tscn" id="10_kkxxu"]
 [ext_resource type="PackedScene" uid="uid://bpsv24bidekvd" path="res://scenes/ui/WinScene.tscn" id="11_webkr"]
 [ext_resource type="PackedScene" uid="uid://chn4o5g5la4n0" path="res://scenes/ui/OptionsScene.tscn" id="12_voi6f"]
+[ext_resource type="AudioStream" uid="uid://rfksbq1sy2wn" path="res://asset/brackeys_platformer_assets/brackeys_platformer_assets/music/time_for_adventure.mp3" id="13_dikvt"]
+[ext_resource type="AudioStream" uid="uid://dyjuo0r0nuohx" path="res://asset/sounds/kenney_ui-audio/Audio/click2.ogg" id="14_scjjp"]
+[ext_resource type="AudioStream" uid="uid://xe0jf7f5gxim" path="res://asset/sounds/kenney_voiceover/you_lose.ogg" id="15_ryhl4"]
+[ext_resource type="AudioStream" uid="uid://buohu6xkw57js" path="res://asset/sounds/kenney_voiceover/you_win.ogg" id="16_5ndpc"]
 
 [sub_resource type="Curve" id="Curve_y8j7x"]
 _data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.0, 0.0, 0, 0]
@@ -283,11 +287,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="NextLevelButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Next Level"
-
 [node name="OptionsButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
@@ -310,6 +309,7 @@ size_flags_vertical = 10
 theme = ExtResource("2_dl4mi")
 
 [node name="DiceHandSize" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.312
@@ -339,6 +339,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HeroHandSize" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.312
@@ -391,17 +392,19 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
+offset_left = -264.0
 offset_top = 32.0
-offset_bottom = 32.0
+offset_right = -93.0
+offset_bottom = 288.0
 grow_horizontal = 2
 pivot_offset = Vector2(85, 0)
 
 [node name="EnemyInfo" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 1088.0
+offset_left = 944.0
 offset_top = 32.0
-offset_right = 1344.0
-offset_bottom = 288.0
+offset_right = 1424.0
+offset_bottom = 296.0
 theme = ExtResource("2_dl4mi")
 
 [node name="MarginContainer" type="MarginContainer" parent="EnemyInfo"]
@@ -436,7 +439,7 @@ theme_override_font_sizes/font_size = 24
 text = "Health"
 
 [node name="Panel" type="Panel" parent="EnemyInfo/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(240, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = ExtResource("4_0i1pl")
@@ -456,6 +459,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="EnemyInfo/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Label3" type="Label" parent="EnemyInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -466,7 +470,7 @@ theme_override_font_sizes/font_size = 24
 text = "Shield"
 
 [node name="Panel" type="Panel" parent="EnemyInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(240, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = ExtResource("4_0i1pl")
@@ -485,15 +489,45 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="HBoxContainer3" type="HBoxContainer" parent="EnemyInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="EnemyInfo/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_dl4mi")
+theme_override_font_sizes/font_size = 24
+text = "Attack"
+
+[node name="Panel" type="Panel" parent="EnemyInfo/MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(240, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("4_0i1pl")
+
+[node name="AttackValueLabel" type="Label" parent="EnemyInfo/MarginContainer/VBoxContainer/HBoxContainer3/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dl4mi")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="MarginContainer2" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -360.0
-offset_top = 224.0
-offset_bottom = -272.0
+offset_bottom = -320.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("2_dl4mi")
@@ -523,28 +557,32 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer2/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Items"
-
-[node name="Score" type="RichTextLabel" parent="MarginContainer2/Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_vertical = 0
-bbcode_enabled = true
+text = "Shop"
 
 [node name="Action" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 1584.0
-offset_top = 832.0
+offset_top = 768.0
 offset_right = 1896.0
 offset_bottom = 1032.0
 theme = ExtResource("2_dl4mi")
 
-[node name="Button" type="Button" parent="Action"]
+[node name="NextLevelButton" type="Button" parent="Action"]
+visible = false
+layout_mode = 2
+offset_left = 40.0
+offset_top = 96.0
+offset_right = 268.0
+offset_bottom = 174.72
+theme_override_font_sizes/font_size = 24
+text = "Next Level"
+
+[node name="EndTurnButton" type="Button" parent="Action"]
 layout_mode = 2
 offset_left = 32.0
-offset_top = 80.0
+offset_top = 96.0
 offset_right = 284.0
-offset_bottom = 122.0
+offset_bottom = 174.72
 theme_override_font_sizes/font_size = 24
 text = "End turn"
 
@@ -559,21 +597,34 @@ offset_left = 1152.0
 offset_top = 768.0
 offset_right = 1152.0
 offset_bottom = 768.0
+max_hand_size = 100
 hand_rotation_curve = null
 hand_vertical_curve = null
 
-[node name="LoseScene" parent="." instance=ExtResource("10_kkxxu")]
-visible = false
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="WinScene" parent="." instance=ExtResource("11_webkr")]
+[node name="LoseScene" parent="CanvasLayer" instance=ExtResource("10_kkxxu")]
 visible = false
-layout_mode = 1
 
-[node name="OptionsScene" parent="." instance=ExtResource("12_voi6f")]
+[node name="WinScene" parent="CanvasLayer" instance=ExtResource("11_webkr")]
 visible = false
-layout_mode = 1
 
-[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]
+[node name="OptionsScene" parent="CanvasLayer" instance=ExtResource("12_voi6f")]
+visible = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_dikvt")
+autoplay = true
+
+[node name="ButtonClick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_scjjp")
+
+[node name="YouLose" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_ryhl4")
+
+[node name="YouWin" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_5ndpc")
+
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="Action/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Action/NextLevelButton" to="." method="_on_next_level_button_pressed"]
+[connection signal="pressed" from="Action/EndTurnButton" to="." method="_on_end_turn_button_pressed"]

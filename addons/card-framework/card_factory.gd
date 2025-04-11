@@ -76,7 +76,7 @@ func preload_card_data() -> void:
 			"info": card_info,
 			"texture": front_image_texture
 		}
-		print("Preloaded card data:", preloaded_cards[card_name])
+		# print("Preloaded card data:", preloaded_cards[card_name])
 		
 		file_name = dir.get_next()
 

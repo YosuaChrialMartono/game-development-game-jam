@@ -1,0 +1,7 @@
+{
+  "name": "shield",
+  "front_image": "shield.png",
+  "hp": 10,
+  "type": "physical",
+  "attack": 15
+}

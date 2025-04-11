@@ -4,14 +4,14 @@ class_name Dice
 
 enum DICE_TYPE {
 	NUMBER, MULTIPLIER, ELEMENT, WEAPON
-}	
+}
 
 const dice_type_enum = DICE_TYPE
-const SIZE := Vector2(128,128)
+const SIZE := Vector2(128, 128)
 
-@export var type: dice_type_enum 
+@export var type: dice_type_enum
 @export var dice_index: int
-@onready var animated_sprite: AnimatedSprite2D 
+@onready var animated_sprite: AnimatedSprite2D
 
 @onready var number_dice_sprite = $NumberDiceSprite
 @onready var mult_dice_sprite = $MultiplierDiceSprite
@@ -28,17 +28,7 @@ func _ready() -> void:
 	animated_sprite.visible = true
 	$BlankSprite.visible = false
 
-#func _process(delta) -> void:
-	# Ensure input is only detected once per press
-	#if Input.is_action_just_pressed("ui_accept") and not is_rolling:
-		#print_debug("rolling dice")
-		#roll_dice()
-
-
 func roll_dice() -> void:
-	animated_sprite.play("default")
-	await get_tree().create_timer(1.0).timeout  # Simulate rolling time
-
 	var random_number = randi_range(1, 6)
 	var dice_roll_value = get_value(random_number)
 	animated_sprite.play(str(dice_roll_value))

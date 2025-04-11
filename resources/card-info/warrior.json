@@ -3,5 +3,5 @@
   "front_image": "warrior.png",
   "hp": 10,
   "type": "physical",
-  "attack": 100
+  "attack": 10
 }

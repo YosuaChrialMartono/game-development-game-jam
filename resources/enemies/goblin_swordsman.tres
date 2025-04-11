@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BaseEnemiesResource" load_steps=3 format=3 uid="uid://k13x2gwmocn5"]
+
+[ext_resource type="Script" path="res://script/entities/enemies/base_enemies_resources.gd" id="1_76s2p"]
+[ext_resource type="Texture2D" uid="uid://4whxdv6i43au" path="res://asset/textures/cards/enemies/goblin_swordsman.png" id="2_txl7x"]
+
+[resource]
+script = ExtResource("1_76s2p")
+name = "Goblin Swordsman"
+hp = 10
+shield = 5
+attack_damage = 20
+texture = ExtResource("2_txl7x")

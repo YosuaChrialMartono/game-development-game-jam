@@ -23,6 +23,7 @@ UpgradeGlobal="*res://script/upgrade_global.gd"
 EnemiesGlobal="*res://script/enemies_global.gd"
 GameManager="*res://script/game_manager.gd"
 PlayersGlobal="*res://script/players_global.gd"
+SceneTransition="*res://scenes/ui/SceneTransition.tscn"
 
 [display]
 
@@ -37,3 +38,7 @@ window/stretch/aspect="expand"
 
 theme/custom="res://resources/ui/UI.tres"
 theme/custom_font="res://asset/font/a-apple-tea-font/AppleTeaFont.tres"
+
+[rendering]
+
+renderer/rendering_method="mobile"

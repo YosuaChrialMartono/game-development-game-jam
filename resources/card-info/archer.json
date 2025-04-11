@@ -1,0 +1,7 @@
+{
+  "name": "archer",
+  "front_image": "archer.png",
+  "hp": 5,
+  "type": "physical",
+  "attack": 8
+}

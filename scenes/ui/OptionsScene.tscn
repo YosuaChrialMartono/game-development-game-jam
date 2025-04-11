@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://chn4o5g5la4n0"]
+[gd_scene load_steps=3 format=3 uid="uid://chn4o5g5la4n0"]
 
 [ext_resource type="Script" path="res://script/ui/options.gd" id="1_0640d"]
+[ext_resource type="AudioStream" uid="uid://dyjuo0r0nuohx" path="res://asset/sounds/kenney_ui-audio/Audio/click2.ogg" id="2_nxvjm"]
 
 [node name="OptionsScene" type="Control"]
 layout_mode = 3
@@ -151,6 +152,9 @@ text = "No, take me back"
 [node name="YesButton" type="Button" parent="ConfirmationPopUp/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Yes"
+
+[node name="ButtonClick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_nxvjm")
 
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

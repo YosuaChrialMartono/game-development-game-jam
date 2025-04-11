@@ -34,7 +34,8 @@ func _ready() -> void:
 		hero_card_dict[card_name] = {
 			"info": card_info,
 		}
-		print("Preloaded card data:", hero_card_dict[card_name])
+		avail_hero_cards.append(card_name)
+		# print("Preloaded card data:", hero_card_dict[card_name])
 		
 		file_name = dir.get_next()
 

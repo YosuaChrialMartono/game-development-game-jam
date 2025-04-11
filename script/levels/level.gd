@@ -24,6 +24,7 @@ extends Node
 @onready var enemy_name: Label = $EnemyInfo/MarginContainer/VBoxContainer/EnemyName
 @onready var enemy_hp_value_label: Label = $EnemyInfo/MarginContainer/VBoxContainer/HBoxContainer/Panel/HPValueLabel
 @onready var enemy_shield_value_label: Label = $EnemyInfo/MarginContainer/VBoxContainer/HBoxContainer2/Panel/ShieldValueLabel
+@onready var enemy_attack_value_label: Label = $EnemyInfo/MarginContainer/VBoxContainer/HBoxContainer3/Panel/AttackValueLabel
 
 @onready var total_attack_damage: Label = $MarginContainer/Panel/MarginContainer/VBoxContainer/TotalDamageContainer/Panel/TotalAttackDamage
 @onready var attack_point_label: Label = $MarginContainer/Panel/MarginContainer/VBoxContainer/TotalDamageContainer/AttackDamageCalculatorContainer/Panel/AttackPointLabel
@@ -32,9 +33,16 @@ extends Node
 @onready var dice_hand_size_label: Label = $DiceHandSize/DiceHandSizeLabel
 @onready var hero_hand_size_label: Label = $HeroHandSize/HeroHandSizeLabel
 
-@onready var lose_scene: Control = $LoseScene
-@onready var win_scene: Control = $WinScene
-@onready var options_scene: Control = $OptionsScene
+@onready var lose_scene: Control = $CanvasLayer/LoseScene
+@onready var win_scene: Control = $CanvasLayer/WinScene
+@onready var options_scene: Control = $CanvasLayer/OptionsScene
+
+@onready var next_level_button: Button = $Action/NextLevelButton
+@onready var end_turn_button: Button = $Action/EndTurnButton
+
+@onready var button_click: AudioStreamPlayer2D = $ButtonClick
+@onready var you_lose: AudioStreamPlayer2D = $YouLose
+@onready var you_win: AudioStreamPlayer2D = $YouWin
 
 const DICE_SCENE = preload("res://scenes/characters/Dice.tscn")
 
@@ -42,7 +50,10 @@ func _renderDice() -> void:
 	var spacing := 56.0
 	var base_dice_width := 128.0
 	var base_dice_height := 128.0
-	var total_dice_count := DiceGlobal.active_dice.size()
+
+	DiceGlobal.resetRenderedDice()
+
+	var total_dice_count: int = DiceGlobal.active_dice_info.size()
 
 	# Calculate max columns based on available width and scaling
 	var available_width: int = int(dice_parent.size.x)
@@ -72,14 +83,9 @@ func _renderDice() -> void:
 	if require_height > available_height:
 		scale_factor = float(available_height) / require_height
 
-	print_debug(scale_factor)
-
 	var scaled_dice_width := base_dice_width * scale_factor
 	var scaled_dice_height := base_dice_height * scale_factor
 	var scaled_spacing := spacing * scale_factor
-	print_debug(scaled_dice_width)
-	print_debug(scaled_dice_height)
-	print_debug(scaled_spacing)
 
 
 	# Compute total layout height to center vertically
@@ -88,25 +94,32 @@ func _renderDice() -> void:
 
 	# Optional: clear previous dice
 	for child in dice_parent.get_children():
-		child.queue_free()
+		dice_parent.remove_child(child)
 
 	for i in range(total_dice_count):
 		var row := int(i / float(max_columns))
 		var col := i % max_columns
-		var dice = DiceGlobal.active_dice[i]
+		var dice_type = DiceGlobal.active_dice_info[i]
+		
+		var new_dice = DICE_SCENE.instantiate()
+		new_dice.dice_index = DiceGlobal.rendered_active_dice.size()
+		new_dice.type = dice_type
 
 		# Compute row start X to center each row individually
 		var current_row_count: int = min(max_columns, total_dice_count - row * max_columns)
 		var row_width := current_row_count * scaled_dice_width + (current_row_count - 1) * scaled_spacing
 		var start_x := (available_width - row_width) / 2
 
-		dice.position = Vector2(
+		new_dice.position = Vector2(
 			margin + start_x + col * (scaled_dice_width + scaled_spacing),
 			margin + start_y + row * (scaled_dice_height + scaled_spacing)
 		)
-		dice.scale = Vector2(scale_factor, scale_factor)
-		dice.name = "Dice" + str(i)
-		dice_parent.add_child(dice)
+		new_dice.scale = Vector2(scale_factor, scale_factor)
+		new_dice.name = "Dice" + str(i)
+		
+		
+		DiceGlobal.add_rendered_dice(new_dice)
+		dice_parent.add_child(new_dice)
 
 		
 func _renderHeroCard() -> void:
@@ -116,6 +129,8 @@ func _renderHeroCard() -> void:
 func _renderEnemy() -> void:
 	var child: Enemy = EnemiesGlobal.active_enemy
 	enemy_parent.add_child(child)
+	EnemiesGlobal.introEnemy()
+	enemy_attack_value_label.text = str(EnemiesGlobal.active_enemy.enemy_resource.attack_damage)
 
 func _ready() -> void:
 	print_debug("level ready")
@@ -124,32 +139,33 @@ func _ready() -> void:
 	current_level_label.text = str(GameManager.get_current_level())
 
 	# Init dice value array with appropriate size
-	DiceGlobal.dice_value.resize(DiceGlobal.active_dice.size())
+	DiceGlobal.dice_value.resize(DiceGlobal.active_dice_info.size())
 	DiceGlobal.dice_value.fill(0)
 	
 	_renderHeroCard()
 	
+	print_debug(EnemiesGlobal.active_enemy)
+	
 	_renderEnemy()
 	enemy_name.text = EnemiesGlobal.active_enemy.enemy_resource.name
 	
-	_update_level_state()
-
-#func _process(_delta: float) -> void:
-	
+	update_level_state()
 
 func _on_next_level_button_pressed() -> void:
 	GameManager.initNewLevel()
-	_update_level_state()
-
-func _on_button_pressed() -> void:
-	GameManager.end_turn()
-	await get_tree().create_timer(1.0).timeout
-	_update_level_state()
+	button_click.play()
 	
 func _on_options_button_pressed() -> void:
-	options_scene.visible=true
+	options_scene.visible = true
+	button_click.play()
 
-func _update_level_state():
+func _on_end_turn_button_pressed() -> void:
+	button_click.play()
+	if not GameManager.is_rolling:
+		GameManager.end_turn()
+		update_level_state()
+
+func update_level_state():
 	enemy_hp_value_label.text = str(EnemiesGlobal.get_enemy_hp())
 	enemy_shield_value_label.text = str(EnemiesGlobal.get_enemy_shield())
 	
@@ -165,11 +181,16 @@ func _update_level_state():
 		current_level_text += "/%d"%GameManager.win_level
 	current_level_label.text = current_level_text
 	
-	dice_hand_size_label.text = "%d/%d" % [DiceGlobal.active_dice.size(), DiceGlobal.max_dice_hand_size]
+	dice_hand_size_label.text = "%d/%d" % [DiceGlobal.active_dice_info.size(), DiceGlobal.max_dice_hand_size]
 	hero_hand_size_label.text = "%d/%d" % [HeroGlobal.active_hero.size(), HeroGlobal.max_hero_hand_size]
 
 	if (GameManager.get_current_level() == GameManager.win_level) && (not GameManager.is_endless_mode):
 		win_scene.visible = true
-	
+		you_win.play()
+
 	if PlayersGlobal.hp <= 0:
 		lose_scene.visible = true
+		you_lose.play()
+	if EnemiesGlobal.get_enemy_hp() <= 0:
+		next_level_button.visible = true
+		end_turn_button.visible = false

@@ -1,6 +1,6 @@
 extends Node
 
-@onready var _is_rolling = false
+@onready var is_rolling = false
 
 @onready var _level: int = 0
 @onready var win_level: int = 8
@@ -10,17 +10,17 @@ const LEVEL_SCENE = preload("res://scenes/levels/Level.tscn")
 const MAIN_MENU_SCENE = preload("res://scenes/ui/MainMenu.tscn")
 
 var attack_point_value = 0
-var mult_point_value = 0
+var mult_point_value = 1
 
 func _rollDice() -> void:
-	_is_rolling = true # Lock rolling
-	for dice: Dice in DiceGlobal.active_dice:
+	is_rolling = true # Lock rolling
+	for dice: Dice in DiceGlobal.rendered_active_dice:
 		dice.roll_dice()
-	_is_rolling = false # Unlock rolling after completion
+	is_rolling = false # Unlock rolling after completion
 	
 func calculateDamage() -> int:
 	var attack_point = 0
-	var mult_point = 0
+	var mult_point = 1
 
 	# Count all number dice value
 	for value in DiceGlobal.dice_value:
@@ -40,11 +40,11 @@ func calculateDamage() -> int:
 		if value is int:
 			continue
 		if value == "x1":
-			mult_point = 1
+			mult_point += 1
 		elif value == "x2":
-			mult_point = 2
+			mult_point += 2
 		elif value == "x3":
-			mult_point = 3
+			mult_point += 3
 	
 	attack_point_value = attack_point
 	mult_point_value = mult_point
@@ -52,12 +52,10 @@ func calculateDamage() -> int:
 	return attack_point * mult_point
 	
 func player_attack():
-	if not _is_rolling:
+	if not is_rolling:
 		DiceGlobal.reset_dice_value()
 		print_debug("rolling dice")
 		_rollDice()
-		
-		await get_tree().create_timer(1.0).timeout
 		
 		var damage = calculateDamage()
 		EnemiesGlobal.damage_enemy(damage)
@@ -67,60 +65,88 @@ func enemies_attack():
 
 func startNewGame() -> void:
 	_level = 0
-	initNewLevel()
+	reset_damage_counter()
 	PlayersGlobal.setupNewGame()
 	DiceGlobal.setupNewGame()
 	HeroGlobal.setupNewGame()
+	# _debug_level_create_dice()
+	# _debug_level_create_hero()
+	assign_dice()
+	assign_hero_card()
 
-	_debug_level_create_dice()
-	_debug_level_create_hero()
+	initNewLevel()
 
+func reset_damage_counter():
+	attack_point_value = 0
+	mult_point_value = 1
 
-	get_tree().change_scene_to_packed(LEVEL_SCENE)
+func set_enemy():
+	EnemiesGlobal.set_enemy()
+	var enemyHP = EnemiesGlobal.get_enemy_hp()
+	EnemiesGlobal.set_enemy_hp(enemyHP * (_level_modifier * _level))
+
 
 func initNewLevel() -> void:
 	_level += 1
-	EnemiesGlobal.set_enemy()
-	var enemyHP = EnemiesGlobal.get_enemy_hp()
-	print_debug(enemyHP)
-	EnemiesGlobal.set_enemy_hp(enemyHP * (_level_modifier * _level))
+	set_enemy()
+	# Reset player shield
+	PlayersGlobal.shield = PlayersGlobal.BASE_SHIELD
+	reset_damage_counter()
+	
+	# Random choice for dice or hero, change later
+	var randomChoice = randi_range(0, 1)
+	if randomChoice == 0:
+		assign_dice()
+	else:
+		assign_hero_card()
+
+	if EnemiesGlobal.active_enemy:
+		SceneTransition.change_scene(LEVEL_SCENE)
 
 func get_current_level() -> int:
 	return _level
 
 func end_turn():
 	player_attack()
-	await get_tree().create_timer(1.0).timeout
 	if EnemiesGlobal.get_enemy_hp() <= 0:
-		initNewLevel()
+		await EnemiesGlobal.destroy_enemy()
 	else:
 		enemies_attack()
 
+func assign_dice():
+	var avail_dice = [Dice.DICE_TYPE.NUMBER, Dice.DICE_TYPE.MULTIPLIER]
+	print_debug(avail_dice)
+	DiceGlobal.add_active_dice_type(avail_dice.pick_random())
+
+func assign_hero_card():
+	print_debug(HeroGlobal.avail_hero_cards.pick_random())
+	HeroGlobal.add_hero(HeroGlobal.avail_hero_cards.pick_random())
+
 func _debug_level_create_dice():
-	DiceGlobal.add_dice(Dice.DICE_TYPE.NUMBER)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
-	DiceGlobal.add_dice(Dice.DICE_TYPE.MULTIPLIER)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.NUMBER)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_active_dice_type(Dice.DICE_TYPE.MULTIPLIER)
 
 func _debug_level_create_hero():
-	# HeroGlobal.add_hero("warrior")
-	# HeroGlobal.add_hero("warrior")
-	# HeroGlobal.add_hero("warrior")
-	# HeroGlobal.add_hero("warrior")
-	# HeroGlobal.add_hero("warrior")
+	HeroGlobal.add_hero("warrior")
+	HeroGlobal.add_hero("shield")
+	HeroGlobal.add_hero("archer")
+	HeroGlobal.add_hero("wizard")
+	HeroGlobal.add_hero("warrior")
 	HeroGlobal.add_hero("priest")
 
 # func _ready() -> void:	
