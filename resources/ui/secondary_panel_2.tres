@@ -1,0 +1,12 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bqmvmkktekt6y"]
+
+[ext_resource type="Texture2D" uid="uid://ja5qk7r4flvd" path="res://asset/textures/kenney_fantasy-ui-borders/PNG/Double/Panel/panel-001.png" id="1_y3s66"]
+
+[resource]
+texture = ExtResource("1_y3s66")
+texture_margin_left = 30.3136
+texture_margin_top = 28.2508
+texture_margin_right = 29.1244
+texture_margin_bottom = 29.0583
+region_rect = Rect2(0, 0, 96, 96)
+modulate_color = Color(0.22301, 0.542894, 0.468536, 1)

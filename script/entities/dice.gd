@@ -12,7 +12,6 @@ const SIZE := Vector2(128,128)
 @export var type: dice_type_enum 
 @export var dice_index: int
 @onready var animated_sprite: AnimatedSprite2D 
-@onready var dice_score_label = $DiceScore 
 
 @onready var number_dice_sprite = $NumberDiceSprite
 @onready var mult_dice_sprite = $MultiplierDiceSprite
@@ -43,10 +42,6 @@ func roll_dice() -> void:
 	var random_number = randi_range(1, 6)
 	var dice_roll_value = get_value(random_number)
 	animated_sprite.play(str(dice_roll_value))
-
-	# Ensure the label exists before modifying its text
-	if dice_score_label:
-		dice_score_label.text = str(dice_roll_value)
 
 	DiceGlobal.add_dice_value(dice_roll_value, dice_index)
 	

@@ -66,3 +66,6 @@ func get_hero_info(hero_type: String):
 		push_error("Hero type %s did not exist" % hero_type)
 
 	return hero_card_dict[hero_type]
+
+func setupNewGame():
+	active_hero = []

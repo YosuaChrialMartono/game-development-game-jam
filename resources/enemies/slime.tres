@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_q84qd")
-name = ""
+name = "Slime"
 hp = 10
 shield = 0
 attack_damage = 1

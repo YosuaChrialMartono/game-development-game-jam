@@ -23,7 +23,6 @@ func set_enemy() -> void:
 	
 	new_enemy.enemy_resource = slime_enemy
 	active_enemy = new_enemy
-	print_debug(active_enemy.enemy_resource.hp)
 
 func damage_enemy(damage: int) -> void:
 	if damage > get_enemy_shield():
@@ -32,6 +31,10 @@ func damage_enemy(damage: int) -> void:
 		_enemy_hp -= tanked_damage
 	else:
 		_enemy_shield -= damage
+
+func get_enemy_name() -> String:
+	print_debug(active_enemy.enemy_resource.name)
+	return active_enemy.enemy_resource.name
 
 func get_enemy_hp() -> int:
 	return _enemy_hp

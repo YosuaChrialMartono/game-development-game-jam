@@ -1,7 +1,10 @@
 extends Node
 
-var hp = 10
-var shield = 10
+const BASE_HP = 10
+const BASE_SHIELD = 10
+
+var hp = BASE_HP
+var shield = BASE_SHIELD
 
 func damagePlayer(damage: int):
 	print_debug("Damaged Player %s"%damage)
@@ -17,3 +20,7 @@ func getPlayerShield() -> int:
 
 func getPlayerHP() -> int:
 	return hp
+
+func setupNewGame():
+	hp = BASE_HP
+	shield = BASE_SHIELD

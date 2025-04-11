@@ -1,15 +1,43 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://8dcp3ixxoxk"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://8dcp3ixxoxk"]
 
-[ext_resource type="StyleBox" uid="uid://cedqi1xisbadd" path="res://resources/ui/button_focus_styled_box_flat.tres" id="1_qpqhp"]
-[ext_resource type="StyleBox" uid="uid://cs48puc6ajtef" path="res://resources/ui/button_hover_styled_box_flat.tres" id="1_vm8ha"]
 [ext_resource type="SystemFont" uid="uid://bw5yqtdhe4yv7" path="res://resources/ui/font.tres" id="1_xdatv"]
-[ext_resource type="StyleBox" uid="uid://buclcstbpjn00" path="res://resources/ui/button_styled_box_flat.tres" id="2_lv5g7"]
+[ext_resource type="Texture2D" uid="uid://crxelyjru0tx2" path="res://asset/textures/kenney_fantasy-ui-borders/PNG/Double/Panel/panel-000.png" id="2_h1o75"]
+[ext_resource type="Texture2D" uid="uid://12t7qs4ttyqv" path="res://asset/textures/kenney_fantasy-ui-borders/PNG/Double/Panel/panel-008.png" id="5_dkh3a"]
+[ext_resource type="Texture2D" uid="uid://bqr70fnyrxxcq" path="res://asset/textures/kenney_fantasy-ui-borders/PNG/Double/Panel/panel-015.png" id="5_ovcd7"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3e11"]
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t3m02"]
+texture = ExtResource("2_h1o75")
+texture_margin_left = 26.5965
+texture_margin_top = 27.9131
+texture_margin_right = 27.3864
+texture_margin_bottom = 31.5998
+region_rect = Rect2(0, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o8fbg"]
+texture = ExtResource("2_h1o75")
+texture_margin_left = 26.5965
+texture_margin_top = 27.9131
+texture_margin_right = 27.3864
+texture_margin_bottom = 31.5998
+region_rect = Rect2(0, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u0fxs"]
+texture = ExtResource("5_ovcd7")
+texture_margin_left = 27.1231
+texture_margin_top = 26.0698
+texture_margin_right = 28.1764
+texture_margin_bottom = 27.6498
+region_rect = Rect2(0, 0, 96, 96)
+modulate_color = Color(0.533037, 0.533037, 0.533037, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jldbr"]
+texture = ExtResource("5_dkh3a")
+texture_margin_left = 42.1757
+texture_margin_top = 33.8555
+texture_margin_right = 45.5563
+texture_margin_bottom = 35.5124
+region_rect = Rect2(0, 0, 96, 96)
+modulate_color = Color(0.14902, 0.168627, 0.266667, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewww0"]
 bg_color = Color(0.366595, 0.366595, 0.366594, 1)
@@ -35,12 +63,14 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [resource]
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/font_sizes/font_size = 48
 Button/fonts/font = ExtResource("1_xdatv")
-Button/styles/focus = ExtResource("1_qpqhp")
-Button/styles/hover = ExtResource("1_vm8ha")
-Button/styles/normal = ExtResource("2_lv5g7")
+Button/styles/focus = SubResource("StyleBoxTexture_t3m02")
+Button/styles/hover = SubResource("StyleBoxTexture_o8fbg")
+Button/styles/normal = SubResource("StyleBoxTexture_u0fxs")
 Label/fonts/font = ExtResource("1_xdatv")
-Panel/styles/panel = SubResource("StyleBoxFlat_i3e11")
+Panel/styles/panel = SubResource("StyleBoxTexture_jldbr")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_ewww0")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_puvtn")

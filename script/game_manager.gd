@@ -4,8 +4,10 @@ extends Node
 
 @onready var _level: int = 0
 @onready var win_level: int = 8
+@onready var is_endless_mode = false
 @onready var _level_modifier = 2
 const LEVEL_SCENE = preload("res://scenes/levels/Level.tscn")
+const MAIN_MENU_SCENE = preload("res://scenes/ui/MainMenu.tscn")
 
 var attack_point_value = 0
 var mult_point_value = 0
@@ -49,13 +51,6 @@ func calculateDamage() -> int:
 
 	return attack_point * mult_point
 	
-func initNewLevel() -> void:
-	_level += 1
-	EnemiesGlobal.set_enemy()
-	var enemyHP = EnemiesGlobal.get_enemy_hp()
-	print_debug(enemyHP)
-	EnemiesGlobal.set_enemy_hp(enemyHP * (_level_modifier * _level))
-	
 func player_attack():
 	if not _is_rolling:
 		DiceGlobal.reset_dice_value()
@@ -70,6 +65,26 @@ func player_attack():
 func enemies_attack():
 	PlayersGlobal.damagePlayer(EnemiesGlobal.active_enemy.enemy_resource.attack_damage)
 
+func startNewGame() -> void:
+	_level = 0
+	initNewLevel()
+	PlayersGlobal.setupNewGame()
+	DiceGlobal.setupNewGame()
+	HeroGlobal.setupNewGame()
+
+	_debug_level_create_dice()
+	_debug_level_create_hero()
+
+
+	get_tree().change_scene_to_packed(LEVEL_SCENE)
+
+func initNewLevel() -> void:
+	_level += 1
+	EnemiesGlobal.set_enemy()
+	var enemyHP = EnemiesGlobal.get_enemy_hp()
+	print_debug(enemyHP)
+	EnemiesGlobal.set_enemy_hp(enemyHP * (_level_modifier * _level))
+
 func get_current_level() -> int:
 	return _level
 
@@ -81,17 +96,34 @@ func end_turn():
 	else:
 		enemies_attack()
 
-
-#func _process(delta) -> void:
-	# Ensure input is only detected once per press
-func _ready() -> void:
+func _debug_level_create_dice():
 	DiceGlobal.add_dice(Dice.DICE_TYPE.NUMBER)
 	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
+	DiceGlobal.add_dice(Dice.DICE_TYPE.ELEMENT)
 	DiceGlobal.add_dice(Dice.DICE_TYPE.MULTIPLIER)
-	
+
+func _debug_level_create_hero():
 	# HeroGlobal.add_hero("warrior")
 	# HeroGlobal.add_hero("warrior")
 	# HeroGlobal.add_hero("warrior")
 	# HeroGlobal.add_hero("warrior")
 	# HeroGlobal.add_hero("warrior")
 	HeroGlobal.add_hero("priest")
+
+# func _ready() -> void:	
+
+func activateEndlessMode():
+	is_endless_mode = true
