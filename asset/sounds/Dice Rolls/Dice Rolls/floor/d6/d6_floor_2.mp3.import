@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b4u5qbijcwgt8"
+path="res://.godot/imported/d6_floor_2.mp3-593f44073ba107802d8bd2aa25cb6f70.mp3str"
+
+[deps]
+
+source_file="res://asset/sounds/Dice Rolls/Dice Rolls/floor/d6/d6_floor_2.mp3"
+dest_files=["res://.godot/imported/d6_floor_2.mp3-593f44073ba107802d8bd2aa25cb6f70.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

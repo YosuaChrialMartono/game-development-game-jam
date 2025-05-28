@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ppavi4rpy2af"
+path="res://.godot/imported/half_muted_2.mp3-b583b84f54a2f01cd31508410b008345.mp3str"
+
+[deps]
+
+source_file="res://asset/sounds/Dice Rolls/Dice Rolls/stone/half muted/half_muted_2.mp3"
+dest_files=["res://.godot/imported/half_muted_2.mp3-b583b84f54a2f01cd31508410b008345.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

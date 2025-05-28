@@ -39,12 +39,15 @@ extends Node
 
 @onready var next_level_button: Button = $Action/NextLevelButton
 @onready var end_turn_button: Button = $Action/EndTurnButton
+@onready var roll_button: Button = $Action/RollButton
 
 @onready var button_click: AudioStreamPlayer2D = $ButtonClick
 @onready var you_lose: AudioStreamPlayer2D = $YouLose
 @onready var you_win: AudioStreamPlayer2D = $YouWin
 
-const DICE_SCENE = preload("res://scenes/characters/Dice.tscn")
+@export var DICE_SCENE : PackedScene
+
+#const DICE_SCENE = preload("res://scenes/characters/Dice.tscn")
 
 func _renderDice() -> void:
 	var spacing := 56.0
@@ -138,6 +141,7 @@ func _ready() -> void:
 	
 	current_level_label.text = str(GameManager.get_current_level())
 
+	print_debug(DiceGlobal.active_dice_info)
 	# Init dice value array with appropriate size
 	DiceGlobal.dice_value.resize(DiceGlobal.active_dice_info.size())
 	DiceGlobal.dice_value.fill(0)
@@ -149,6 +153,9 @@ func _ready() -> void:
 	_renderEnemy()
 	enemy_name.text = EnemiesGlobal.active_enemy.enemy_resource.name
 	
+	update_level_state()
+
+func _physics_process(delta: float) -> void:
 	update_level_state()
 
 func _on_next_level_button_pressed() -> void:
@@ -163,7 +170,6 @@ func _on_end_turn_button_pressed() -> void:
 	button_click.play()
 	if not GameManager.is_rolling:
 		GameManager.end_turn()
-		update_level_state()
 
 func update_level_state():
 	enemy_hp_value_label.text = str(EnemiesGlobal.get_enemy_hp())
@@ -194,3 +200,9 @@ func update_level_state():
 	if EnemiesGlobal.get_enemy_hp() <= 0:
 		next_level_button.visible = true
 		end_turn_button.visible = false
+		roll_button.visible = false
+
+
+func _on_roll_button_pressed() -> void:
+	button_click.play()
+	GameManager.roll_dice()

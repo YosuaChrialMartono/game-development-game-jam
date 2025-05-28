@@ -17,7 +17,7 @@ const BOSS_CARD_SCENE = preload("res://scenes/characters/Boss.tscn")
 @onready var _enemy_shield = 0
 
 func set_enemy() -> void:
-	if active_enemy:
+	if is_instance_valid(active_enemy):
 		active_enemy.queue_free()
 	active_enemy = null
 	var new_enemy = ENEMY_CARD_SCENE.instantiate()

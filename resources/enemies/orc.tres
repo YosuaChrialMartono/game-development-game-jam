@@ -7,6 +7,6 @@
 script = ExtResource("1_od0ab")
 name = "Orc"
 hp = 50
-shield = 20
+shield = 0
 attack_damage = 10
 texture = ExtResource("2_se3o3")

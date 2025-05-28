@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://n6jcnpp1jdvl"
+path="res://.godot/imported/d20_1.mp3-cf93f48a28c966929796b4e333c7679e.mp3str"
+
+[deps]
+
+source_file="res://asset/sounds/Dice Rolls/Dice Rolls/stone/d20/d20_1.mp3"
+dest_files=["res://.godot/imported/d20_1.mp3-cf93f48a28c966929796b4e333c7679e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

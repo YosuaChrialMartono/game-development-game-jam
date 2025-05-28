@@ -1,8 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://kd7d61atmfss"]
+[gd_scene load_steps=37 format=3 uid="uid://kd7d61atmfss"]
 
 [ext_resource type="Script" path="res://script/entities/dice.gd" id="1_euvij"]
 [ext_resource type="Texture2D" uid="uid://d1ksdop1g7qwp" path="res://asset/textures/dices/Dice V1.png" id="2_7eweb"]
 [ext_resource type="Texture2D" uid="uid://0cktln1a8vig" path="res://asset/textures/dices/Blank Dice.png" id="3_1pf5s"]
+[ext_resource type="AudioStream" uid="uid://d2llth2augflw" path="res://asset/sounds/Dice Rolls/d20_4.mp3" id="4_pooaa"]
+[ext_resource type="AudioStream" uid="uid://broh8y31857n1" path="res://asset/sounds/Dice Rolls/Dice Rolls/shuffle/shuffle_open_3.mp3" id="5_bpxq8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r168r"]
 atlas = ExtResource("2_7eweb")
@@ -324,3 +326,10 @@ visible = false
 position = Vector2(65, 64)
 sprite_frames = SubResource("SpriteFrames_r718c")
 animation = &"ICE"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_pooaa")
+
+[node name="DiceShuffle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_bpxq8")
+volume_db = 20.0

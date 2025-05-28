@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://brg5dfwudp3c7"]
+[gd_scene load_steps=21 format=3 uid="uid://brg5dfwudp3c7"]
 
 [ext_resource type="Script" path="res://script/levels/level.gd" id="1_y3gc1"]
 [ext_resource type="Theme" uid="uid://8dcp3ixxoxk" path="res://resources/ui/UI.tres" id="2_dl4mi"]
+[ext_resource type="PackedScene" uid="uid://kd7d61atmfss" path="res://scenes/characters/Dice.tscn" id="2_pa3hu"]
 [ext_resource type="PackedScene" uid="uid://3863xlfgk7or" path="res://scenes/ui/background.tscn" id="2_t3bp3"]
 [ext_resource type="PackedScene" uid="uid://c7u8hryloq7hy" path="res://addons/card-framework/card_manager.tscn" id="3_d1wcv"]
 [ext_resource type="StyleBox" uid="uid://cyy7pvv13qvtb" path="res://resources/ui/secondary_panel.tres" id="4_0i1pl"]
@@ -41,6 +42,7 @@ grow_vertical = 2
 script = ExtResource("1_y3gc1")
 hand_curve = SubResource("Curve_y8j7x")
 rotation_curve = SubResource("Curve_2cf61")
+DICE_SCENE = ExtResource("2_pa3hu")
 
 [node name="TileMap" parent="." instance=ExtResource("2_t3bp3")]
 
@@ -580,11 +582,20 @@ text = "Next Level"
 [node name="EndTurnButton" type="Button" parent="Action"]
 layout_mode = 2
 offset_left = 32.0
-offset_top = 96.0
+offset_top = 40.0
 offset_right = 284.0
-offset_bottom = 174.72
+offset_bottom = 118.72
 theme_override_font_sizes/font_size = 24
-text = "End turn"
+text = "Attack"
+
+[node name="RollButton" type="Button" parent="Action"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 144.0
+offset_right = 284.0
+offset_bottom = 222.72
+theme_override_font_sizes/font_size = 24
+text = "Roll Dice"
 
 [node name="CardManager" parent="." instance=ExtResource("3_d1wcv")]
 card_asset_dir = "res://asset/textures/cards"
@@ -628,3 +639,4 @@ stream = ExtResource("16_5ndpc")
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="Action/NextLevelButton" to="." method="_on_next_level_button_pressed"]
 [connection signal="pressed" from="Action/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="Action/RollButton" to="." method="_on_roll_button_pressed"]

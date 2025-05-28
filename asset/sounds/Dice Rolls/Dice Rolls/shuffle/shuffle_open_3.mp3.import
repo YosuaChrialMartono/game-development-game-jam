@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://broh8y31857n1"
+path="res://.godot/imported/shuffle_open_3.mp3-fb9b14e8e02c6e077eabecbbd212b197.mp3str"
+
+[deps]
+
+source_file="res://asset/sounds/Dice Rolls/Dice Rolls/shuffle/shuffle_open_3.mp3"
+dest_files=["res://.godot/imported/shuffle_open_3.mp3-fb9b14e8e02c6e077eabecbbd212b197.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

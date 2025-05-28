@@ -13,6 +13,8 @@ var active_dice_info: Array[Dice.DICE_TYPE] = []
 
 var max_dice_hand_size: int = BASE_MAX_DICE_HAND_SIZE
 
+var is_rolling = false
+
 func add_rendered_dice(dice: Dice) -> void:
 	rendered_active_dice.append(dice)
 

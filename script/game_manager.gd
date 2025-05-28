@@ -22,6 +22,8 @@ func calculateDamage() -> int:
 	var attack_point = 0
 	var mult_point = 1
 
+	print_debug(DiceGlobal.dice_value)
+
 	# Count all number dice value
 	for value in DiceGlobal.dice_value:
 		if value is int:
@@ -51,14 +53,11 @@ func calculateDamage() -> int:
 
 	return attack_point * mult_point
 	
-func player_attack():
-	if not is_rolling:
+func roll_dice():
+	if not DiceGlobal.is_rolling:
 		DiceGlobal.reset_dice_value()
 		print_debug("rolling dice")
 		_rollDice()
-		
-		var damage = calculateDamage()
-		EnemiesGlobal.damage_enemy(damage)
 	
 func enemies_attack():
 	PlayersGlobal.damagePlayer(EnemiesGlobal.active_enemy.enemy_resource.attack_damage)
@@ -105,6 +104,10 @@ func initNewLevel() -> void:
 
 func get_current_level() -> int:
 	return _level
+
+func player_attack():
+	var damage = calculateDamage()
+	EnemiesGlobal.damage_enemy(damage)
 
 func end_turn():
 	player_attack()
@@ -153,3 +156,6 @@ func _debug_level_create_hero():
 
 func activateEndlessMode():
 	is_endless_mode = true
+
+func _physics_process(delta: float) -> void:
+	calculateDamage()

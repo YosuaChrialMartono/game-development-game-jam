@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c30msjxv4g5pk"
+path="res://.godot/imported/muted_4.mp3-fa153481b125c6ecb0442587bb4a3910.mp3str"
+
+[deps]
+
+source_file="res://asset/sounds/Dice Rolls/Dice Rolls/stone/muted/muted_4.mp3"
+dest_files=["res://.godot/imported/muted_4.mp3-fa153481b125c6ecb0442587bb4a3910.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

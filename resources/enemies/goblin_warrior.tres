@@ -7,6 +7,6 @@
 script = ExtResource("1_10t7k")
 name = "Goblin Warrior"
 hp = 15
-shield = 5
+shield = 0
 attack_damage = 15
 texture = ExtResource("2_8gice")
