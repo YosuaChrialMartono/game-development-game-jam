@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://brg5dfwudp3c7"]
+[gd_scene load_steps=22 format=3 uid="uid://brg5dfwudp3c7"]
 
 [ext_resource type="Script" path="res://script/levels/level.gd" id="1_y3gc1"]
 [ext_resource type="Theme" uid="uid://8dcp3ixxoxk" path="res://resources/ui/UI.tres" id="2_dl4mi"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bpsv24bidekvd" path="res://scenes/ui/WinScene.tscn" id="11_webkr"]
 [ext_resource type="PackedScene" uid="uid://chn4o5g5la4n0" path="res://scenes/ui/OptionsScene.tscn" id="12_voi6f"]
 [ext_resource type="AudioStream" uid="uid://rfksbq1sy2wn" path="res://asset/brackeys_platformer_assets/brackeys_platformer_assets/music/time_for_adventure.mp3" id="13_dikvt"]
+[ext_resource type="PackedScene" uid="uid://ceng5kvvlp1ea" path="res://scenes/ui/ShopScene.tscn" id="14_nkl2v"]
 [ext_resource type="AudioStream" uid="uid://dyjuo0r0nuohx" path="res://asset/sounds/kenney_ui-audio/Audio/click2.ogg" id="14_scjjp"]
 [ext_resource type="AudioStream" uid="uid://xe0jf7f5gxim" path="res://asset/sounds/kenney_voiceover/you_lose.ogg" id="15_ryhl4"]
 [ext_resource type="AudioStream" uid="uid://buohu6xkw57js" path="res://asset/sounds/kenney_voiceover/you_win.ogg" id="16_5ndpc"]
@@ -621,6 +622,9 @@ visible = false
 visible = false
 
 [node name="OptionsScene" parent="CanvasLayer" instance=ExtResource("12_voi6f")]
+visible = false
+
+[node name="ShopScene" parent="CanvasLayer" instance=ExtResource("14_nkl2v")]
 visible = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

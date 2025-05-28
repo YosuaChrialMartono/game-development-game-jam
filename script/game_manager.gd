@@ -73,6 +73,12 @@ func startNewGame() -> void:
 	assign_dice()
 	assign_hero_card()
 
+	var randomChoice = randi_range(0, 1)
+	if randomChoice == 0:
+		assign_dice()
+	else:
+		assign_hero_card()
+
 	initNewLevel()
 
 func reset_damage_counter():
@@ -93,11 +99,11 @@ func initNewLevel() -> void:
 	reset_damage_counter()
 	
 	# Random choice for dice or hero, change later
-	var randomChoice = randi_range(0, 1)
-	if randomChoice == 0:
-		assign_dice()
-	else:
-		assign_hero_card()
+	# var randomChoice = randi_range(0, 1)
+	# if randomChoice == 0:
+	# 	assign_dice()
+	# else:
+	# 	assign_hero_card()
 
 	if EnemiesGlobal.active_enemy:
 		SceneTransition.change_scene(LEVEL_SCENE)

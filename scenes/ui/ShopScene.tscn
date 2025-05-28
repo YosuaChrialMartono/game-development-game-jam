@@ -1,0 +1,161 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceng5kvvlp1ea"]
+
+[ext_resource type="Script" path="res://script/ui/shop.gd" id="1_amq8a"]
+[ext_resource type="AudioStream" uid="uid://dyjuo0r0nuohx" path="res://asset/sounds/kenney_ui-audio/Audio/click2.ogg" id="2_86w0p"]
+
+[node name="ShopScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_amq8a")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.233123, 0.260359, 0.395449, 0.756863)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -231.5
+offset_top = -197.0
+offset_right = 231.5
+offset_bottom = 197.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.881937, 0.881937, 0.881937, 1)
+theme_override_font_sizes/font_size = 48
+text = "Which one do you want to add?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiceButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Dice"
+
+[node name="CardButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Hero Card"
+
+[node name="ConfirmationPopUpBG" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.233123, 0.260359, 0.395449, 0.756863)
+
+[node name="ConfirmationPopUp" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -440.0
+offset_top = -420.0
+offset_right = 440.0
+offset_bottom = 356.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="ConfirmationPopUp"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ConfirmationPopUp/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -231.5
+offset_top = -197.0
+offset_right = 231.5
+offset_bottom = 197.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationPopUp/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="ConfirmationPopUp/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.881937, 0.881937, 0.881937, 1)
+theme_override_font_sizes/font_size = 96
+text = "Are you sure?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ConfirmationPopUp/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.881937, 0.881937, 0.881937, 1)
+theme_override_font_sizes/font_size = 32
+text = "You can't change your action"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NoButton" type="Button" parent="ConfirmationPopUp/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "No, take me back"
+
+[node name="YesButton" type="Button" parent="ConfirmationPopUp/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Yes"
+
+[node name="ButtonClick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_86w0p")
+
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/DiceButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/CardButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="ConfirmationPopUp/Panel/MarginContainer/VBoxContainer/NoButton" to="." method="_on_no_button_pressed"]
+[connection signal="pressed" from="ConfirmationPopUp/Panel/MarginContainer/VBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]

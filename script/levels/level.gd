@@ -46,6 +46,7 @@ extends Node
 @onready var you_win: AudioStreamPlayer2D = $YouWin
 
 @export var DICE_SCENE : PackedScene
+@onready var shop_scene: Control = $CanvasLayer/ShopScene
 
 #const DICE_SCENE = preload("res://scenes/characters/Dice.tscn")
 
@@ -159,8 +160,8 @@ func _physics_process(delta: float) -> void:
 	update_level_state()
 
 func _on_next_level_button_pressed() -> void:
-	GameManager.initNewLevel()
 	button_click.play()
+	shop_scene.show()
 	
 func _on_options_button_pressed() -> void:
 	options_scene.visible = true
@@ -190,13 +191,13 @@ func update_level_state():
 	dice_hand_size_label.text = "%d/%d" % [DiceGlobal.active_dice_info.size(), DiceGlobal.max_dice_hand_size]
 	hero_hand_size_label.text = "%d/%d" % [HeroGlobal.active_hero.size(), HeroGlobal.max_hero_hand_size]
 
-	if (GameManager.get_current_level() == GameManager.win_level) && (not GameManager.is_endless_mode):
-		win_scene.visible = true
+	if (GameManager.get_current_level() == GameManager.win_level) && (not GameManager.is_endless_mode) && EnemiesGlobal.get_enemy_hp() <= 0:
 		you_win.play()
+		win_scene.visible = true
 
 	if PlayersGlobal.hp <= 0:
-		lose_scene.visible = true
 		you_lose.play()
+		lose_scene.visible = true
 	if EnemiesGlobal.get_enemy_hp() <= 0:
 		next_level_button.visible = true
 		end_turn_button.visible = false
